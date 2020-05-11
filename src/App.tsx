@@ -14,8 +14,6 @@ const quiz = rawQuiz
   .sort(() => Math.random() - 0.5)
   .flat() as string[]
 
-console.log(quiz)
-
 function isOdd(number: number) {
     return Math.abs(number % 2) == 1;
 }
@@ -66,7 +64,7 @@ function App() {
           <button onClick={() => reset()}>Reset history</button>
         </div>
         {isQuestion && <div className="question" onClick={advance}>{quiz[position]}</div>}
-        {isResponse && <div className="response">{quiz[position]}</div>}
+        {isResponse ? <div className="response">{quiz[position]}</div> : <div></div>}
         {isResponse && <div className="buttons">
           <button onClick={() => registerSuccess(currentQuestion)}>La sabia</button>
           <button onClick={() => registerError(currentQuestion)}>Ni idea</button>
