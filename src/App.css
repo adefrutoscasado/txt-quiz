@@ -7,6 +7,7 @@
   align-content: bottom;
   bottom: 0;
   margin-bottom: 0;
+  background-color: black;
 }
 
 .Content {
@@ -16,6 +17,7 @@
   justify-content: space-between;
   bottom: 0;
   margin-bottom: 25px;
+  color: whitesmoke
 }
 
 .App-logo {
