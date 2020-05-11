@@ -66,8 +66,8 @@ function App() {
         {isQuestion && <div className="question" onClick={advance}>{quiz[position]}</div>}
         {isResponse ? <div className="response">{quiz[position]}</div> : <div></div>}
         {isResponse && <div className="buttons">
-          <button onClick={() => registerSuccess(currentQuestion)}>La sabia</button>
-          <button onClick={() => registerError(currentQuestion)}>Ni idea</button>
+          <button className="answer" onClick={() => registerSuccess(currentQuestion)}>La sabia</button>
+          <button className="answer" onClick={() => registerError(currentQuestion)}>Ni idea</button>
         </div>}
       </div>
     </div>
