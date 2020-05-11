@@ -1,0 +1,467 @@
+export default `En que parte de AWS podemos encontrar los identity providers
+IAM
+
+What services are global in AWS?
+IAM, S3, Route 53
+
+Que tres tripos existen en IAM?
+Users, Groups y Roles.
+
+Como se llama el servicio que nos permite usar emails de terceros para utilizarlos como usuario IAM?
+IAM Ferederation
+
+En que OS no podemos utilizar SSH?
+Windows < 10
+
+Que protocolo es SSH?
+TCP
+
+Que protocolo utiliza HTTP?
+TCP
+
+Que puerto usa SSH?
+22
+
+Que puerto utiliza HTTP?
+80
+
+Que puerto utiliza HTTPS?
+443
+
+En que parte del dashboard de amazon podemos encontrar los SG?
+EC2
+
+We have timeout issues trying to conect a EC2, what could be the cause?
+SG issues
+
+A que puede hacer referencia un SG?
+Ips, CIDR, another SG. (No instances!)
+
+Para que sirve ROA?
+Si se siera el caso de que tenemos una IP fija publica en nuestro on-premises y queremos migrarla a AWS, necesitamos hacer una peticion a ROA (Route Origin Authotization)
+
+Que le ocurre a la IP publica de nuestra maquina EC2 cada vez que la reiniciamos?
+Cambia, es dinámica.
+
+Cuantas Elastic IP podemos tener como maximo (por defecto)?
+5
+
+Que es EC2 User data?
+Un script bash que se ejecuta con cada reboot. Es bueno para la parte dinámica que pueda existir en alguna instalación (esta parte no la puede hacer AMI ya que es estatico)
+
+EC2 on demand, para que es bueno?
+Alto coste. Sin permanencia. Para cargas de un tiempo que no sepamos a priori y con una carga media pero constante.
+
+EC2 reserved, para que es bueno?
+Bajo coste pero con larga permanencia. Es bueno para BBDD por ej. Puede ser normal, scheduled (como la que utilizabamos en persei) o convertible (para cambiar el tipo)
+
+EC2 Spot instance, para que es bueno?
+Puede definir un coste maximo y la instancia correra hasta ese precio maximo. Spot block: Te dejan una instancia por un tiempo limitado. Bueno para analisis que no importa cuando hacerlo.
+
+EC2 Dedicated hosts, para que es bueno?
+Physical dedicated server. Full control over underlying sockets/cores. Useful for BYOL (Bring your own license)
+
+EC2 types: R, C, M, I, G, T2/T3. Que es cada una?
+(by order) RAM, CPU, Medium (medium ram, medium cpu), I/O y T2-T3 son burstable instances. En estas el rendimiento se basa en burst credits (buenas para unexpected load)
+
+Tengo una instancia EC2 T2/T3 basada en burst credits, pero continuamente estoy perdiendo los creditos. Que puedo hacer?
+Contratar una maquina mas potente, T2T3 no es para tu caso.
+
+Para que es bueno AMI?
+Para archivos etaticos de una instalacion. Permite usar una already-provisioned instance.
+
+Que scope tiene una AMI para poder compartirla?
+por region
+
+EC2 Placemente Group Cluster, para que sirve?
+Buena red ya que todas estan conectadas. Pero si una falla, todas fallan. Buena para big data
+
+EC2 Placemente Group Spread, para que sirve?
+High availability. Limited to 7. Apps that need isolation for each service.
+
+Ec2 Placemente Group partition, para que sirve?
+Mix de Cluster y de Spread. Un termino medio entre ambos.
+
+Que es un ENI?
+Una tarjeta de red virtual. LA podemos enganchar a la maquina que queramos on-the-fly.
+
+En un load balancer que hacemos si alguna maquina EC2 nos reporta fallos en los Health Check:
+Dejamos de mandar peticiones. No la terminamos ni la reiniciamos.
+
+Que load balancer soporta enrutamiento por path?
+Application Load balancer. Puede ser en funcion de hostname, path y query string.
+
+Qué load balancer tiene una IP estatica por AZ?
+Network load balancer
+
+En que cabecera pueden ver las aplicaciones la IP original desde la cual se hace la peticion?
+X-Forwarded-For
+
+En que load balancer nos cuesta dinero rediriger a otra region?
+Network load balancer
+
+Cual es el load balancer mas rapido y con menos latencia?
+Network load balancer
+
+Que load balancer/s soportan SNI?
+ALB y NLB.
+
+Como podemos utilizar SNI en un classic load balancer que no lo soporta?
+SNI combinado con Cloudfront.
+
+En un EC2 auto escaling group, que criterio utilizamos para terminar ina instancia?
+Elegimos la AZ con mas intancias, y luego la instancia con la oldest launch configuration
+
+En un EC2 auto escaling group, que hacemos si los EC2 status checks nos indican que esta fallando pero la necesitamos (no ha habido eventos scale out?
+La reemplazamos.
+
+Si un LB indica que hay una instancia unhealthy, que hace el scaling group?
+Nada, por defecto.
+
+Cual es el cooldown period de EC2 auto escaling group por defecto?
+300 segundos / 5 minutos
+
+Que es EBS phemeral?
+Una EBS en el que los datos no perduran en los reinicios, son efimeros.
+
+Diferencia entre EBS Cold HDD y EBS STI HDD?
+STI HDD es para datos accedidios frecuentemente (Big data, "necesito mucho espacio pero tambien acceder mas o menos rapido").  Cold HDD es para infrecuentes
+
+Cual es el unico tipo de EBS en el que los IOPS aumentan con el tamaño?
+GP2 (general purpose)
+
+EBS SNapshots, que pas acuando estamos haciendo uno en un EBS?
+Lo podemos utilizar, unicamente bajan los IOPS.
+
+Como se llama el servicio especial para hacer backups de Amazon?
+Amazon Data Lifecycle Manager (DLM)
+
+EBS Raid 0, para que es?
+Para cOmbinar las capacidades de escriturao y lectura de dos EBS, a costa de mas riesgo (uno falla, todos fallan)
+
+EBS Raid 1, para que es?
+M1rroring a volume. Mas seguridad, mantenemos la capacidad como si fuera UNA SOLA.
+
+EFS, para que sirve?
+File system that can be mounted across multiple instances, multi AZ.
+
+Tenemos una RDS Multi AZ, que ocurre si una AZ falla?
+Su CNAME se cambia a la que está en stanby
+
+En una RDS, como son las escrituras con read replicas ASYNC o SYNC?
+ASYNC, toma tiempo para propagarse. (Eventually consistent)
+
+En RDS, cuantas read replicas podemos tener maximo?
+5
+
+Para que RDS podemos utilizar IAM para loguearnos de manera nativa?
+MySQL y PostgreSQL (Oracle no)
+
+Como creamos un token temporal de acceso a RDS?
+Con RDS Auth Service, no STS
+
+Unica tecnologia AWS de base de datos que soporta multi region?
+Aurora
+
+Para que es bueno Aurora en general?
+Autoescaling based on use, Unpredistable wordload
+
+Que es Aurora Serverless y que diferencia hay con Aurora normal?
+Automaticamente inicia, apaga o escala la capacidad basada en las necesidades. Buenas para spikes de uso.
+
+Podemos usar IAM EN Elasticache (Redis, Memcached)?
+No, usamos un token (RedisAuth para redis)
+
+Podemos hacer backups de Elasticache?
+Solo de Redis.
+
+En Route 53 que es redireccion hace un Record A?
+URL to IPv4
+
+En Route 53 que es redireccion hace un Record AAAA?
+URL to IPv6
+
+En Route 53 que es redireccion hace un Record CNAME?
+URL to URL
+
+En Route 53 que es redireccion hace un Record Alias?
+URL to AWS Recource
+
+Que tipo de Route 53 neceistamos para usar subdominios (o "Non-root") something.mydomain.com?
+CNAME
+
+En que consiste Route 53 simple routing policy?
+El cliente recibe varias direcciones IP para un dominio y la direccion se elige aleatoriamente por el cliente, puede utilizarse para balancear.
+
+Tengo una nueva version de la app con mejoras significantes y quiero dirigir un 5% de los clientes a la nueva version, como puedo hacerlo?
+Usando Route 53 weighted routing
+
+No puedo dar servicio en un pais debido al ambito legal de mismo. Como puedo negar el acceso a mi servicio?
+Usando Route 53 geolocation routing policy
+
+Route 53 Multi Value routing policy, en que consiste?
+Es como el simple routing pero añadiendo un health check o condicion a cada ruta para que se incluta en la respuesta del DNS. IP A (Si condicion A), IP B (Si condicion B)
+
+En un entorno MultiAZ, que ocurre si la AZ donde se encuentra la instancia princpial empieza a tener problemas?
+El CNAME se cambia a la instancia en standby.
+
+Que requisitos debemos cumplir en Route 53 para poder redireccionar una ruta a un sitio estatico e S3?
+El nombre del bucket y la ruta deben ser similares.
+
+Cual es el limite maximo de subida en S3 sin utilizar multipart?
+5TB
+
+Tiene coste mover archivos desde un EC2 a S3?
+No, es gratis
+
+Si queremos usar un algoritmo propio de encriptacion en S3, que tipo debemos usar?
+Client side encryption?
+
+Que tipo de encriptacion S3 necesita estrictamente HTTPS?
+SEE-C, ya que la clave de encriptacion viaja en las cabeceras de la peticion.
+
+En la encriptacion por defecto server-side de S3 (SSE-S3). que tipo se utiliza?
+AES256
+
+Que es S3 Amazon Macie?
+ML-powered security service que nos ayuda a prevenir la perdida de datos mediante la deteccion automatica de informacion sensible en S3. Nos permite visualizar como estan siendo esos datos sensibles.
+
+Que tipo de bucket utilizamos para pequeños archivos pero infrecuentes accesos?
+S3 Standard IA
+
+Que tipo de bucket utilizamos para datos redundantes y reproducibles?
+S3 One Zone IA
+
+Que tipo de bucket utilizamos para archivar datos?
+S3 Glazier
+
+Que tipo de servicio para S3 utilizamos para tareas de warehouse?
+Redshift
+
+Que es un S3 lifecycle ruke?
+Define una accion (pasar a glacier en 30 dias por ej.). O una expiration action (eliminarse tras 30 dias en glacier sin acceso ninguno).
+
+Alguien esta cambiando la configuracion de buckets S3, donde podemos comprobar los logs?
+Los S3 access logs no contienen esta info. Debemos usar S3 CloudTrail.
+
+Que nos permite Athena?
+Servicio serverless que permite usar lenguage SQL para S3. Para realizar analitica. Se paga por query.
+
+Como configuramos los permisos en Cloudfront?
+Mediante OAI (Origin Access Identity)
+
+Como configuramos los permisos en Cloudfront para S3?
+Mediante OAI (Origin Access Identity) y acttualizando los Bucket policies de S3.
+
+Como permitimos el acceso desde un Cloudfront Edge a una maquina EC2?
+Aceptando la IP pulica del edge location.
+
+AWS Storage Extra, necesitamos mover 250 TB, que utilizariamos?
+Varios Snowball, ya que Snowmobile es para 10^5 Tb (100Pb).
+
+AWS Storage Extra, que capacidad tiene Snowball?
+72 Tb
+
+AWS Storage Extra, que capacidad tiene Snowball Edge?
+80 Tb
+
+AWS Storage Extra, que capacidad tiene Snowmobile?
+>100Pb
+
+Nuestro on-premises utiliza el protocolo SMB (server Message Block) para almacenamiento. Que servicio podemos usar para crear un almacenamiento hibrido en la nube?
+AWS Storage gateway: File gateway
+
+Nuestro on-premises utiliza el protocolo NFS para almacenamiento. Que servicio podemos usar para crear un almacenamiento hibrido en la nube?
+AWS Storage gateway: File gateway
+
+Nuestro on-premises utiliza el protocolo iSCSI para almacenamiento. Que servicio podemos usar para crear un almacenamiento hibrido en la nube?
+AWS Storage gateway: Volume gateway
+
+SQS: Cual es el numero maximo de mensajes en la cola y el tamaño maximo del mismo?
+120K por cola. 256 Kb/mensaje.
+
+Cual es la retencion por defecto en SQS?
+4 dias. Maximo 14.
+
+Se ha procesado en mensaje SQS dos veces, cual puede ser el problema?
+El visibility timeout es demasiado bajo.
+
+Que es el dead letter queue (DLQ) de SQS?
+Donde se almacenan los mensajes que han sido reasignados a la cola demasiadas veces y no han superado el redrive policy. Por lo que se descartan.
+
+Que valor puede tener el long polling de SQS?
+Entre 1 y 20 segundos.
+
+Ventaja y desventaja de SQS FIFO?
+Ventaja: mensajes en orden. Desventaja: perdida de rendimiento.
+
+Maxima capacidad de SQS FIFO?
+300 msg/sec y 3000 msg/sec without batching
+
+Como podemos garantizar el orden en Kinesis, incluso si estamos utilizando shard?
+Mediante un partition key
+
+En Kinesis, tnemos un stream de clicks, pero no podemos diferencias el usuario. Como podemos diferenciarlos?
+Usando un partition key.
+
+Cual es la capacidad de escritrua y de lectura de un shard de Kinesis?
+1 Mb y 2 Mb.
+
+En que servicios podemos cargar datos usando Kinesis Data Firehouse?
+Redhist, Amazon S3, ElasticSearch y Splunk.
+
+Queremos acceder desde lamba a una RDS, como debemos usar los permisos?
+Deberiamos asignar permisos a la IAM de Lamba en RDS.
+
+Como se despliega una Lambda function en Canary?
+Escalado en dos incrementos por intervalos
+
+Como se despliega una Lambda function en Linear?
+Escalado de forma lineal por minutos (escalones de 1 minutos asta completar el 100%)
+
+Timeout de una funcion de duracion de ejecucion lambda?
+15 minutos
+
+Max deplotment size of lamba function?
+50 Mb
+
+Que nis permite DynamoDB streams?
+Contienen los cambios que se realizan en la bd, y pueden ser encadenados a funciones lambda que por ejemplo manden emails con una nueva entrada en un documento.
+
+Que base de datos puede utilizarse como cache debido a su rapidez y almacenamiento key-value?
+DynamoDB
+
+Que base de datos puede utilizarse como almacenamiento de sesion?
+DynamoDB, usando su funcion TTL (Time to live)
+
+Dynamo On demand vs Dynamo standard (auto escaled). Que usaremos en produccion y en development?
+On demand > development. Standard > Produccion
+
+Que es dynamoDB DAX:
+A cache layer to improve dynamoddb read cpacity.
+
+AWS Api Gateway, que podemos utilizar para evitar picos/bursts/spikes:
+Throttling limits. Manda un 429 too many requests cuando un usuario sobrepasa el limite de uso. El cliente tendra que repetir la operacion.
+
+Que es AWS SAM:
+Serverless Applitacion Model. Un framework de Amazon para crear apps serverless con Lambda, DynamoDB. API Gateway y Cognito.
+
+Que devuelve Cognito al autenticarse?
+Un cognito ID o JWT.
+
+Si Redshift y Athena nos permiten usar lenguage SQL en S3, cual es la diferencia?
+Redhist no permite hacer queries en glacier u otros servicios que tenga un tiempo de espera alto.
+
+Queremos hacer queries parciales sobre DynamoDB, que servicio podemos utilizar?
+ElasticSearch permite queries parciales, algo que el propio Dynamo no.
+
+Dentro del monitoreo de CloudWatch encontramos Detailed Y Custom, que resolucion nor permiten?
+Detailed > 1 minuto (extra para metrica por defecto). Custom > 1 segundo.
+
+Tenemos una maquina EC2 que se congela continuamente y no podemos acceder mediante SSH. Que podemos hacer para visualizar los logs?
+Usar CloudWatch.
+
+Cual es la esolucion de las alarmas de cloudwatch?
+Entre 10 y 30 segundos.
+
+Durante cuanto tiempo es valido el token de STS?
+Hasta 1 hora
+
+Que servicios nos permiten acceder a servicios de AWS sin tener un IAM explicito asignado?
+Cognito y STS.
+
+Necesitamos un identity Fereation pero nuestro sistema no es compatible con SAML2, que podemos utilizar?
+Custom Identity Broker Application
+
+Queremos montar un Identity Federation con los usuarios de windows y basado en web, que podemos utilizar?
+ADFS (Active directory FS)
+
+Queremos montar un Identity Federation con las cuentas de Google, que podemos utilizar?
+SAML 2.0 is primarily used to let users sign in via a well-known external identity provider (IdP), such as Login with Amazon, Facebook, Google. It does not utilize Active Directory.
+
+De manera general, cual es la forma de evitar un ataque MITM (Man in the middle)?
+Utilizando HTTPS.
+
+QUé tres tipos de claves (CMK - Customer Master Key) podemos manejar en KMS?
+Default (CMK) creadas y manejadas por amazon. Custom keys creadas en KMS. Custom keys creadas por el cliente.
+
+Cuando debemos usar Envelope Encryption vs Default KMS Encruption:
+Cuando los datos sean mayor de 4 Kb
+
+Podemos encriptar parametros en AWS Parameter Store?
+Si, en integracion con KMS. Estos se desencriptaran en tiempo de ejecucion.
+
+Qué dos ventajas princpiales tiene AWS Secret Manager?
+Rotación de valor del parámetro e integracion con RDS.
+
+Qué servicio nos permite protegernos de ataques de inyeccion SQL?
+AWS Web Application Firewall (WAF)
+
+Qué servicio añade proteccion Scross Site Scripting?
+AWS Web Application Firewall (WAF)
+
+Qué servicio añade proteccion DDoS?
+AWS Shield
+
+La ormativa HIPAA para datos de salud nos exige qué niveles de encriptacion?
+server-side AES256 o Client-side con claves propias
+
+Cuando tenemos un CIDR de /32 Cuantas IP admite el rango?
+Solo una
+
+Cuando tenemos un CIDR de /31 Cuantas IP admite el rango?
+Solo dos. 2^(32-31) = 2
+
+Cuando tenemos un CIDR de /30 Cuantas IP admite el rango?
+Solo dos. 2^(32-30) = 4
+
+Cuando tenemos un CIDR de /24 cuantos numeros se pueden cambiar?
+Solo el ultimo
+
+Que requisitos hay en el rango de CIDR de dos VPC que usemos de manera simultanea?
+Que no haya overlap de los rangos.
+
+Del CIDR 10.0.16.0/20 esperamos 4096, pero AWS solo nos dice que tenemos 4091 IPs, por que?
+AWS reserva 5 ips, cuatro primeras y ultima.
+
+Que es necesario para que una EC2 tenga internet en una VPC?
+Internet Gateway, Crear tura de internet en el router. (Para hacer ping necesitariamos protocolo IMCP activo en el router.)
+
+A que rutas (orden) se da mas prioiridad en un router de un VPC?
+Lowest to highest.
+
+No podemos acceder a un puerto de una maquina en una VPC y ya hemos incluido du IP en el router? que puede estar pasando?
+El SG de la maquina debe aceptar ese acceso a ese puerto.
+
+NAT instance vs NAT Gateway, que ventaja principal ofrecen Gateway?
+bandwith, less admin, availability. Autoscaling form 5 Gbps to 45.
+
+Como conseguimos High Availability en una NAT Gateway?
+Añadiendo multiple NAT across AZ.
+
+Necesita NAT Gateway SG?
+No.
+
+Hay un rango de IPs sospechosas que estan atacando una flota de EC2 en una VPC. Que podemos hacer para bloquearlas?
+Denegar acceso en el rango Inbound
+
+Que permite inbound y outbound por defecto?
+All y all. Las reglas son evaluadas siempre para el que realiza la peticion.
+
+Despues de instalar una VPC Peer que debemso hacer para permitir la comunicacion?
+Actualizar los routers de los VPC.
+
+Que dos servicios utilizan VPC ENdpoint Gateway?
+S3 y DynamoDB
+
+Como es la manera correcta configurar un Bastion Host en cuanto a seguridad?
+Aceptar solo puerto 22 (SSH) unicamente para tu IP en su SG. Colocarlo en la public subnet.
+
+Site to Site VPN, utiliza internet publica o privada?
+Publica, como alternativa tenemos Direct Connect.
+
+Direct Connect, utiliza internet publica o privada?
+Privada, al contrario de Site to Site VPN. Ademas tenemos mas ancho de banda y coste menor.
+
+Egress Only Internet Gateway, para que sirve?
+Permite manejar IPv6 en VPC. Tan pronto como una instancia es IPv6, es publica. Nos permite poder acceder a internet desde IPv6 sin hacerlas publicas estrictamente.`
