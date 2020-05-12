@@ -1,4 +1,6 @@
-export default `En que parte de AWS podemos encontrar los identity providers
+export default `
+
+En que parte de AWS podemos encontrar los identity providers
 IAM
 
 What services are global in AWS?
@@ -464,4 +466,51 @@ Direct Connect, utiliza internet publica o privada?
 Privada, al contrario de Site to Site VPN. Ademas tenemos mas ancho de banda y coste menor.
 
 Egress Only Internet Gateway, para que sirve?
-Permite manejar IPv6 en VPC. Tan pronto como una instancia es IPv6, es publica. Nos permite poder acceder a internet desde IPv6 sin hacerlas publicas estrictamente.`
+Permite manejar IPv6 en VPC. Tan pronto como una instancia es IPv6, es publica. Nos permite poder acceder a internet desde IPv6 sin hacerlas publicas estrictamente.
+
+Cual es el tamaöo maximo de una peticion PUT de S3?
+5GB
+
+A partir de que tamaöo se recomiendo subida multipart?
+100 mb
+
+Provee colas SQS FSIFO un sistema para procesar el elemento una unica vez?
+Si
+
+Proveen colas SQS el orden de los mensajes?
+No
+
+Tenemos una VPC con varias maquinas EC2 a las que podemos acceder por internet. Hemos aöadido una que tiene el SG de las otras pero no podemos acceder. Cual puede ser el problema?
+Asigna un Elastic IP
+
+Que nos permite Kinesis Data Firehose?
+Una forma sencilla de cargar y analizar streams en near real time. Totalmente gestionado por Amazon y con autoescalado para aceptar la cualquier carga de datos. Prepara y carga los datos para ser analizados por el destino que elijas.
+
+Necesitamos real-time processing of streaming big data. Que podemos utilizar?
+Kinesis Data Firehouse (Prepara y carga los datos de manera continua y los destina al servicio de tu eleccion) + Kinesis Data Streams (Real time processing)
+
+Cuando creamos un EBS snapshot se crea totalmente o es incremental?
+Incremental
+
+Acabo de hacer PUT de un elemento S3. Inmediatamente hago GET. Que obtendgo?
+El element antiguo o el elemento nuevo, pero nunca datos corruptos (PUT eventually consistent). Por ejemplo si reemplazamos un objeto de 5 GB, amazon necesita tiempo para hacer ese cambio. Si hacemos peticiones paralelas podemos tener este tipo de errores (cada uno puede recibir cosas distintas)
+
+Acabo de hacer DELETE de un elemento S3. Inmediatamente hago GET. Que obtendgo?
+El element antiguo o la respuesta de que no existe, pero nunca datos corruptos (DELETE eventually consistent). Si hacemos peticiones paralelas podemos tener este tipo de errores (cada uno puede recibir cosas distintas)
+
+Estoy intentando lanzar un script en 50 maquinas EC2 en una AZ. Sin embargo, tras 20 maquinas, empieza a generar fallos. Que ocurre?
+Hay un limite basado en vCPU por defecto por region. Hay que hacer una peticion a Amazon mediante un formulario para cambiarlo.
+
+Cual es el tamaöo maximo de un objeto S3?
+5 Tb
+
+Para que sirve S3 Transfer Acceleration?
+Permite transferencias rapidas, faciles y seguras en S3. Ayudandose de las AWS Edge locations de Cloudfrount.
+
+Puede haber cuantas AZ por subnet?
+1 por AZ
+
+Cuando corremos una Instancia RDS en despliegie Multi-AZ, podemos usar la instancia standby operaciones read (read replica) o write?
+No, la estancia standby no puede realizar ninguna accion mientras la instancia primaria este corriendo.
+
+`
