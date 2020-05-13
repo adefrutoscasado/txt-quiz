@@ -468,10 +468,10 @@ Privada, al contrario de Site to Site VPN. Ademas tenemos mas ancho de banda y c
 Egress Only Internet Gateway, para que sirve?
 Permite manejar IPv6 en VPC. Tan pronto como una instancia es IPv6, es publica. Nos permite poder acceder a internet desde IPv6 sin hacerlas publicas estrictamente.
 
-Cual es el tamaöo maximo de una peticion PUT de S3?
+Cual es el tamaño maximo de una peticion PUT de S3?
 5GB
 
-A partir de que tamaöo se recomiendo subida multipart?
+A partir de que tamaño se recomiendo subida multipart?
 100 mb
 
 Provee colas SQS FSIFO un sistema para procesar el elemento una unica vez?
@@ -501,7 +501,7 @@ El element antiguo o la respuesta de que no existe, pero nunca datos corruptos (
 Estoy intentando lanzar un script en 50 maquinas EC2 en una AZ. Sin embargo, tras 20 maquinas, empieza a generar fallos. Que ocurre?
 Hay un limite basado en vCPU por defecto por region. Hay que hacer una peticion a Amazon mediante un formulario para cambiarlo.
 
-Cual es el tamaöo maximo de un objeto S3?
+Cual es el tamaño maximo de un objeto S3?
 5 Tb
 
 Para que sirve S3 Transfer Acceleration?
@@ -513,4 +513,57 @@ Puede haber cuantas AZ por subnet?
 Cuando corremos una Instancia RDS en despliegie Multi-AZ, podemos usar la instancia standby operaciones read (read replica) o write?
 No, la estancia standby no puede realizar ninguna accion mientras la instancia primaria este corriendo.
 
+Tenemos dos read replicas en Aurora, como podemos balancear la carga entre las dos?
+Usando los propies Reader Enpoint de Aurora, estos ya realizan la funcion de balanceo.
+
+Que nos permite S3 Expedited Retrieval?
+Nos permite recuperar archivos de manera urgente en S3, evitando largas esperas como en Glacier.
+
+En que Load Balancer viene activado Cross-Zone Load Balancer por defecto?
+ALB. En CLB y NLB hay que activarlo.
+
+Que es Active-Active failover en Route 53?
+Siempre se incluyen todos los servicios para que se usen, tanto los primeras como los secundarios
+
+Que es Active-Pasive failover en Route 53?
+Se empiezan a redirigir a los servicios secundarios unicamente cuando el primera falla.
+
+Para que sirve CreationPolicy en CloudFormation?
+Es un evento invocado cuando la creacion de un recurso esta listo. Para resolver problemas de asincronia
+
+Que es AWS AppSync?
+Una especie de Firebase de Amazon. Usa GraphQL, real time subscriptions, Dynamo/lambda intregrations...
+
+Diferencia entre Cost Explorer y AWS Budget?
+Cost explorer te permite visualizar como gastas el dinero en Amazon. AWS Budget te permite establecer presupuestos y controlarlo (alertas email incluidas).
+
+Son las ENI desconectadas de una EC2 cuando estas se detienen?
+No
+
+EC2 Reserved Instances, como varia el precio cuando una instancia esta corriendo, parando o terminada?
+No varia, siempre ese el mismo.
+
+EC2 Reserved Instances, no necesitamos mas su uso y hemos pagado ya un año, que podemos hacer?
+Venderla en AWS Rserved Instance Marketplace. Además, debemos terminarla cuanto antes para que no se nos hagan cargos en regimen On-Demand cuando el plazo acabe.
+
+Diferencia entre "Data Protection" y "Data Protection at rest"?
+"Data Protection" se refiere a proteger los datos in transito (mientras vuela a Amazon) y "Data Protection at rest" se refiere a mientras esta almacenado.
+
+Diferencia entre las acciones de S3 "s3:ObjectRemoved:DeleteMarkerCreated" y "s3:ObjectRemoved:Delete"?
+El primero es la marca de que un archivo esta eliminado (cuando se usa versionado) y el segundo es cuando un objeto se elimina permanentemente.
+
+Qué determina el coste de uso de Cloud Formation?
+Las plantillas de Cloud Formation son gratis, unicamente tienen coste los recursos que utilizan.
+
+Cual es la mayor ventaja de usar una VPN en AWS?
+Te permite conectar tu nube AWS a tu on-premises usando sesiones privadas con IP Secutiry (IPSec) y tuneles TLS.
+
+Que permiso necesitamos para copiar objetos S3 de un bucket a otro de otra cuenta?
+Cross-account permissions para S3 en IAM.
+
+Cuanto tiempo almacena Kinesis un stream por defecto?
+24 horas
+
+Que nos permite AWS Beanstalk?
+Desplegar y gestionar aplicaciones de manera sencilla y rapida. Simplemente subes tu app y el se encarga de load balancing, provisioning y application health monitoring. Parecido a Heroku diria
 `
