@@ -566,4 +566,44 @@ Cuanto tiempo almacena Kinesis un stream por defecto?
 
 Que nos permite AWS Beanstalk?
 Desplegar y gestionar aplicaciones de manera sencilla y rapida. Simplemente subes tu app y el se encarga de load balancing, provisioning y application health monitoring. Parecido a Heroku diria
+
+Que es Glacier Vault Lock?
+Te permite forzar el cumplimiento de ciertos ciclos en S3 Glacier. Por ejemplo, no eliminar los archivos al menos durante 1 año (para cumplir con ciertas normativas)
+
+Como salvaguardar disaster recovery en Redshift?
+Cross-Region Snapshots en el Cluster de Redshift
+
+Tenemos un gran set de archivos CSV en S3, como podemos aplicar SQL queries para obtener estadisticos de los datos?
+Athena puede hacer queries directamente sobre el contenido, ya sea estrcturado, semi-estrcturado o desestructurado. Algunos ejemplos son CSV, JSON,...
+
+Tenemos un servicio de pedidos online y de ninguna forma podemos tolerar cobros repetidos en nuestro sistema de colas SQS, que podemos utilizar?
+SQS FIFO provee de Exactly One processing (vs "al menos uno" de SQS estandar), First in first out delivery y high throughput (vs el ilimitado de SQS estandar)
+
+Para que sirve AWS Transit Gateway?Que podemos utilizar para conectar muchas on-premises, VPNs, y VPCs que soporte inter-region?
+AWS Transit Gateway permite conectar muchas on-premises, VPNs, y VPCs soportando inter-region (colocadas en cada region) para que enrute todo el trafico a traves de un unico centro de transito.
+
+Cual es el protocolo de FTP?
+TCP
+
+Cual es el puerto de FTP?
+20 y 21
+
+Que usa CloudTrail para almacenar los logs?
+S3
+
+Donde podemos encontrar los Flow Logs?
+Son los logs de VPC
+
+Para que sirve Connection Draining?
+Permite que el load balancer vaya poco a poco quitando las conexiones a una maquina para que esta pueda terminar las peticiones que esta procesando en un evento de scale in.
+
+Como podemos hacer que un bucket S3 tenga acceso publico para server archivos estaticos?
+Podemos setear los permisos como publicos durante el upload del atchivo. O Simplemente configurando sus policies para setear todos los objetos como publicos.
+
+Como podemos asegurar la integridad de los datos de un buvcket S3 en un desastre?
+Activando cross-region Replication
+
+Para que sirve AWS X-Ray?
+Para trazar y analizar las peticiones que viajan a desde API Gateway hasta los servicios que llama.
+
 `

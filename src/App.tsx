@@ -1,7 +1,7 @@
 import React, {useState, useMemo, useEffect} from 'react'
 import './App.css'
 import rawQuiz from './assets/quiz'
-import {reset, insertDoneQuestion, alreadyDone} from './services/storage'
+import {reset, insertKnownQuestion, alreadyKnown} from './services/storage'
 
 const quiz = rawQuiz
   .split('\n')
@@ -36,7 +36,7 @@ function App() {
   const currentQuestion = isResponse ? quiz[position - 1] : quiz[position]
 
   useEffect(() => {
-    if (alreadyDone(currentQuestion)) skipQuestion()
+    if (alreadyKnown(currentQuestion)) skipQuestion()
   }, [position])
 
   const advance = () => setPosition((prev) => prev + 1)
@@ -47,7 +47,7 @@ function App() {
 
   const registerSuccess = (pregunta: string) => {
     setSuccessNumber((prev) => prev + 1)
-    insertDoneQuestion(pregunta)
+    insertKnownQuestion(pregunta)
     advance()
   }
 
