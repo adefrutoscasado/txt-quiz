@@ -9,7 +9,7 @@
 
 .Content {
   display: flex;
-  height: 30vh;
+  height: 50vh;
   font-size: 18px;
   flex-direction: column;
   justify-content: space-between;

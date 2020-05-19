@@ -579,7 +579,7 @@ Athena puede hacer queries directamente sobre el contenido, ya sea estrcturado, 
 Tenemos un servicio de pedidos online y de ninguna forma podemos tolerar cobros repetidos en nuestro sistema de colas SQS, que podemos utilizar?
 SQS FIFO provee de Exactly One processing (vs "al menos uno" de SQS estandar), First in first out delivery y high throughput (vs el ilimitado de SQS estandar)
 
-Para que sirve AWS Transit Gateway?Que podemos utilizar para conectar muchas on-premises, VPNs, y VPCs que soporte inter-region?
+Para que sirve AWS Transit Gateway?
 AWS Transit Gateway permite conectar muchas on-premises, VPNs, y VPCs soportando inter-region (colocadas en cada region) para que enrute todo el trafico a traves de un unico centro de transito.
 
 Cual es el protocolo de FTP?
@@ -606,4 +606,6 @@ Activando cross-region Replication
 Para que sirve AWS X-Ray?
 Para trazar y analizar las peticiones que viajan a desde API Gateway hasta los servicios que llama.
 
+Protocolo de ping?
+IMCP
 `
