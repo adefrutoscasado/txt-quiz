@@ -34,7 +34,8 @@ function App() {
 
   const isResponse = !isQuestion
   const currentQuestion = isResponse ? quiz[position - 1] : quiz[position]
-  const failLength = quiz.length - alreadyKnownLength()
+  const questionAmount = quiz.length / 2
+  const failLength = questionAmount - alreadyKnownLength()
 
   useEffect(() => {
     if (isAlreadyKnown(currentQuestion)) skipQuestion()
@@ -63,7 +64,7 @@ function App() {
         <div className="header">
           <div>Score: {successNumber}/{successNumber + errorNumber}</div>
           <button onClick={() => reset()}>Reset history</button>
-          <div>Not known yet: {failLength}/{quiz.length}</div>
+          <div>Not known yet: {failLength}/{questionAmount}</div>
         </div>
         {isQuestion && <div className="question" onClick={advance}>{quiz[position]}</div>}
         {isResponse ? <div className="response">{quiz[position]}</div> : <div />}
