@@ -1,7 +1,7 @@
 import React, {useState, useMemo, useEffect} from 'react'
 import './App.css'
 import rawQuiz from './assets/quiz'
-import {reset, insertKnownQuestion, alreadyKnown} from './services/storage'
+import {reset, insertKnownQuestion, isAlreadyKnown, alreadyKnownLength} from './services/storage'
 
 const quiz = rawQuiz
   .split('\n')
@@ -34,9 +34,10 @@ function App() {
 
   const isResponse = !isQuestion
   const currentQuestion = isResponse ? quiz[position - 1] : quiz[position]
+  const failLength = quiz.length - alreadyKnownLength()
 
   useEffect(() => {
-    if (alreadyKnown(currentQuestion)) skipQuestion()
+    if (isAlreadyKnown(currentQuestion)) skipQuestion()
   }, [position])
 
   const advance = () => setPosition((prev) => prev + 1)
@@ -59,12 +60,13 @@ function App() {
   return (
     <div className="App">
       <div className="Content">
-        <div>
-          <span>Score{successNumber}/{successNumber + errorNumber}</span>
+        <div className="header">
+          <div>Score: {successNumber}/{successNumber + errorNumber}</div>
           <button onClick={() => reset()}>Reset history</button>
+          <div>Not known yet: {failLength}/{quiz.length}</div>
         </div>
         {isQuestion && <div className="question" onClick={advance}>{quiz[position]}</div>}
-        {isResponse ? <div className="response">{quiz[position]}</div> : <div></div>}
+        {isResponse ? <div className="response">{quiz[position]}</div> : <div />}
         {isResponse && <div className="buttons">
           <button className="answer" onClick={() => registerSuccess(currentQuestion)}>La sabia</button>
           <button className="answer" onClick={() => registerError(currentQuestion)}>Ni idea</button>
