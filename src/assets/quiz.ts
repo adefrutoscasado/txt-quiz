@@ -399,13 +399,19 @@ Rotación de valor del parámetro e integracion con RDS.
 Qué servicio nos permite protegernos de ataques de inyeccion SQL?
 AWS Web Application Firewall (WAF)
 
-Qué servicio añade proteccion Scross Site Scripting?
+Qué servicio añade proteccion Cross Site Scripting?
 AWS Web Application Firewall (WAF)
 
 Qué servicio añade proteccion DDoS?
 AWS Shield
 
-La ormativa HIPAA para datos de salud nos exige qué niveles de encriptacion?
+Qué protecciones añade AWS Shield?
+Proteccion DDoS
+
+Qué protecciones añade AWS Web Application Firewall?
+Cross Site Scripting, inyeccion SQL. Tambien se pueden bloquear paises. Entre otras cosas.
+
+La normativa HIPAA para datos de salud nos exige qué niveles de encriptacion?
 server-side AES256 o Client-side con claves propias
 
 Cuando tenemos un CIDR de /32 Cuantas IP admite el rango?
@@ -480,7 +486,7 @@ Si
 Proveen colas SQS el orden de los mensajes?
 No
 
-Tenemos una VPC con varias maquinas EC2 a las que podemos acceder por internet. Hemos aöadido una que tiene el SG de las otras pero no podemos acceder. Cual puede ser el problema?
+Tenemos una VPC con varias maquinas EC2 a las que podemos acceder por internet. Hemos añadido una que tiene el SG de las otras pero no podemos acceder. Cual puede ser el problema?
 Asigna un Elastic IP
 
 Que nos permite Kinesis Data Firehose?
@@ -608,4 +614,73 @@ Para trazar y analizar las peticiones que viajan a desde API Gateway hasta los s
 
 Protocolo de ping?
 IMCP
+
+Que es Redshift Spectrum?
+Nos permite hacer queries directamente sobre S3, pero a diferencia de Kinesis que es serverless, necesitamos una instancia/cluster
+
+Que servicio de Amazon nos permite Massively Parallel Query Execution para hacer analiticas?
+Redshift
+
+Cual es el servicio principal de AWS que se nos viene a la mente cuando hablamos de "real time" big data?
+AWS Kinesis
+
+Que nos permite los servicios de Kinesis: Stream / Analytics / Firehouse?
+Streams: Ingesta de streaming de latencia baja a gran escala (big data). Analytics: Aplicar queries SQL en tiempo real. Firehose: Cargar los streams en S3, Redshift, ElasticSearch...
+
+Cuanto tiempo se detiene los datos de un shard de Kinesis?
+Por defecto 1 dia. Puede ser hasta 7 dias.
+
+Podemos reproducir datos en SQS, SNS o Kinesis?
+Solo en Kinesis.
+
+Cuando usamos Decoupling, que dos servicios estan preparados para aceptar multiples consumidores de los datos?
+SNS y Kinesis
+
+Podemos eliminar datos en Kinesis?
+No, los datos son inmutables
+
+Podemos cambiar el numero de Shards y escalarlo?
+Sí (se llama reshard/merge)
+
+Como se determina a qué shard se envía un dato en Kinesis?
+Mediante su clave de mensaje (message key), una cabecera que contiene el id hasheado. Si todos apuntan al mismo se producirá hot partition.
+
+Qué es hot partition en Kinesis?
+Todos los mensajes con datos tienen una cabecera que contiene el id hasheado. Si todos apuntan al mismo se producirá hot partition. Tenemos que distribuirlos por nuestros shards (Carreteras de datos)
+
+Qué significa el mensaje ProvisionedThroughputExceeded en Kinesis?
+Nos hemos pasado del limite que admite el shard de Kinesis. No podemos pasarle tantos datos.
+
+S3 IA, que significan las siglas?
+Infrequent Access.
+
+Qué significa on-premises?
+Algo que corre en la oficina del usuario, no en el cloud.
+
+AWS Fargate, que nos permite?
+Construir una imagen del contenedor definiendo su memoria, recursos... Para despues correrlas pagando unicamente por lor recursos que estan consumen y olvidandonos de toda la gestion del contenedor (definir EC2, provisionar, ejecutar...)
+
+Que es AWS SES?
+Simple Email Service. Mas caro que SNS. Si quieres hacer monitoreo de instancias, hay que usar SNS.
+
+Que nos permite AWS OpsWorks?
+Herramientas DevOps para gestionar tareas repetitivas en servidores. Chef y Puppet son soluciones open source que ofrece.
+
+Que es AWS WorkSpaces?
+Escritorios remotos seguros. Integrados con Microsoft AD.
+
+En Route 53, que es MX Record?
+Es cuando mandamos un MultiValue al que asignamos pesos o prioridades a cada una de las direcciones.
+
+AWS DLM que es?
+Data Lifecycle Manager
+
+AWS CM que es?
+Certificate Manager
+
+Que es una EBS-Backed EC2?
+Una instancia EC2 que usa EBS como volumen de almacenamiento como su dispositivo raiz. Nos permite que si la instancia EC2 falla, podamos llevarnos ese EBS a otra nueva instancia sin problema.
+
+Que es un ECS task?
+Se traduciria por cada instancia que esta corriendo un container. Si tenemos 5 docker corriendo la misma app, tendriamos 5 tasks (ya sea en una instacia o multiple instancias).
 `

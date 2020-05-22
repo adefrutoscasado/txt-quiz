@@ -64,7 +64,7 @@ function App() {
         <div className="header">
           <div>Score: {successNumber}/{successNumber + errorNumber}</div>
           <button onClick={() => reset()}>Reset history</button>
-          <div>Not known yet: {failLength}/{questionAmount}</div>
+          <div>Not yet known: {failLength}/{questionAmount}</div>
         </div>
         {isQuestion && <div className="question" onClick={advance}>{quiz[position]}</div>}
         {isResponse ? <div className="response">{quiz[position]}</div> : <div />}
