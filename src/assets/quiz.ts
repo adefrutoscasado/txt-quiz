@@ -770,4 +770,13 @@ Permiten contectar de manera privada servicios de AWS y VPCs. En este caso sirve
 
 Qué protocolo expone Api Gateway?
 HTTPS
+
+Qué es AWS Database Migration Service?
+Un servicio de Amazon que nos permite migrar rapidamente bases de datos en nuestros on-premises a la nube. Tambien se incluyen servicios como AWS Schema Conversion Tool para migrar distintas tencologias de base de datos.
+
+Como podemos ver los logs de un Load Balancer?
+Tienen un log propio donde podemos consultar las diferentes peticiones y sus horas.
+
+Tenemos un contenedor docker que se encarga de tareas criticas y otras de analitica no esenciales. Que eligiriamos como EC2 para rebajar costes?
+2 tipos, reserved y sport.
 `
