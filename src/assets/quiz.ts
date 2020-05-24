@@ -112,7 +112,7 @@ Como podemos utilizar SNI en un classic load balancer que no lo soporta?
 SNI combinado con Cloudfront.
 
 En un EC2 auto escaling group, que criterio utilizamos para terminar ina instancia?
-Elegimos la AZ con mas intancias, y luego la instancia con la oldest launch configuration
+Elegimos la AZ con mas intancias, y luego la instancia con la oldest launch configuration. Luego se selecciona la que este mas cerca de su billing hour. Si coincide ya es random entre esas.
 
 En un EC2 auto escaling group, que hacemos si los EC2 status checks nos indican que esta fallando pero la necesitamos (no ha habido eventos scale out?
 La reemplazamos.
@@ -210,9 +210,6 @@ El CNAME se cambia a la instancia en standby.
 Que requisitos debemos cumplir en Route 53 para poder redireccionar una ruta a un sitio estatico e S3?
 El nombre del bucket y la ruta deben ser similares.
 
-Cual es el limite maximo de subida en S3 sin utilizar multipart?
-5TB
-
 Tiene coste mover archivos desde un EC2 a S3?
 No, es gratis
 
@@ -278,6 +275,9 @@ AWS Storage gateway: File gateway
 
 Nuestro on-premises utiliza el protocolo iSCSI para almacenamiento. Que servicio podemos usar para crear un almacenamiento hibrido en la nube?
 AWS Storage gateway: Volume gateway
+
+iSCSI, NFS, SMB. A que Storage gateway pertenece cada tipo de dispositivo?
+iSCSI: Volume Gateway. NFS y SMB: File Gateway
 
 SQS: Cual es el numero maximo de mensajes en la cola y el tamaño maximo del mismo?
 120K por cola. 256 Kb/mensaje.
@@ -409,7 +409,7 @@ Qué protecciones añade AWS Shield?
 Proteccion DDoS
 
 Qué protecciones añade AWS Web Application Firewall?
-Cross Site Scripting, inyeccion SQL. Tambien se pueden bloquear paises. Entre otras cosas.
+Cross Site Scripting, inyeccion SQL. Tambien se pueden bloquear paises o IPs concretas. Entre otras cosas.
 
 La normativa HIPAA para datos de salud nos exige qué niveles de encriptacion?
 server-side AES256 o Client-side con claves propias
@@ -459,7 +459,7 @@ All y all. Las reglas son evaluadas siempre para el que realiza la peticion.
 Despues de instalar una VPC Peer que debemso hacer para permitir la comunicacion?
 Actualizar los routers de los VPC.
 
-Que dos servicios utilizan VPC ENdpoint Gateway?
+Que dos servicios utilizan VPC Endpoint Gateway?
 S3 y DynamoDB
 
 Como es la manera correcta configurar un Bastion Host en cuanto a seguridad?
@@ -473,6 +473,9 @@ Privada, al contrario de Site to Site VPN. Ademas tenemos mas ancho de banda y c
 
 Egress Only Internet Gateway, para que sirve?
 Permite manejar IPv6 en VPC. Tan pronto como una instancia es IPv6, es publica. Nos permite poder acceder a internet desde IPv6 sin hacerlas publicas estrictamente.
+
+Cual es el limite maximo de subida en S3 utilizando multipart?
+5TB
 
 Cual es el tamaño maximo de una peticion PUT de S3?
 5GB
@@ -522,8 +525,8 @@ No, la estancia standby no puede realizar ninguna accion mientras la instancia p
 Tenemos dos read replicas en Aurora, como podemos balancear la carga entre las dos?
 Usando los propies Reader Enpoint de Aurora, estos ya realizan la funcion de balanceo.
 
-Que nos permite S3 Expedited Retrieval?
-Nos permite recuperar archivos de manera urgente en S3, evitando largas esperas como en Glacier.
+Que nos permite S3 Expedited Retrieval y en qué tipo de Bucket está disponible?
+Nos permite recuperar archivos de manera urgente en S3, evitando largas esperas en Glacier (NO DISPONIBLE EN DEEP GLACIER ARCHIVE!).
 
 En que Load Balancer viene activado Cross-Zone Load Balancer por defecto?
 ALB. En CLB y NLB hay que activarlo.
@@ -610,7 +613,7 @@ Como podemos asegurar la integridad de los datos de un buvcket S3 en un desastre
 Activando cross-region Replication
 
 Para que sirve AWS X-Ray?
-Para trazar y analizar las peticiones que viajan a desde API Gateway hasta los servicios que llama.
+Para trazar y analizar las peticiones que viajan a desde API Gateway (o microservicios) hasta los servicios que llama.
 
 Protocolo de ping?
 IMCP
@@ -683,4 +686,88 @@ Una instancia EC2 que usa EBS como volumen de almacenamiento como su dispositivo
 
 Que es un ECS task?
 Se traduciria por cada instancia que esta corriendo un container. Si tenemos 5 docker corriendo la misma app, tendriamos 5 tasks (ya sea en una instacia o multiple instancias).
+
+Los snapshots de un EBS que usa encriptacion son automaticamente encriptados, verdadero o falso?
+Verdadero
+
+La informacion que viaja on-transit desde un EC2 a un EBS que usa encriptacion no esta encriptado, verdadero o falso?
+Falso, sí viaja encriptado
+
+Para que sirve AWS Glue?
+Es un servicio gestionado por amazon para extraer, transformar y cargar (ETL: extract, transform, load) datos para ser analizados. AWS Glue inspecciona los datos a los que apuntes para que puedas buscar y ejecutar queries.
+
+En Aurora, si tenemos fallos en la base de datos primaria, que acciones toma?
+Aurora primero intentará  crear una nueva instancia en el mismo AZ. Si no es posible, lo intentará en una AZ diferente
+
+No tenemos mucho dinero y queremos usar un EBS para una base de datos y una app con archivos en el mismo EBS con hasta 460 Gb de espacio, qué tipo debemos escoger?
+GP (General Purpose)
+
+Podemos usar Route 53 weighted routing en combinacion con failover?
+No
+
+Qué health checks usamos para una aplicación web?
+HTTP o HTTPS health checks
+
+Si tenemos una spot instance que cuesta 0.04 €/h y se ha terminado debido a que se ha detectado un incremento del precio se nos cobrará mas de lo acordado?
+No, nunca se cobrará mas de 0.04 €/h
+
+Cual es el tiempo maximo que puede tardar S3 Glacier en recuperar un objeto?
+12 horas
+
+Qué servicio se nos viene a la cabeza cuando hablamos de distributed session data management?
+AWS ElastiCache. Cookie stickiness podria ser una opcion alternativa pero tiene muchas limitaciones.
+
+Estamos usando CloudHSM (Hardware Security Nodule) para almacenar nuestras claves. Debido a logins fallidos, el modulo ha sido borrado. Como podemos recuperar las claves?
+No podemos, se han perdido permanentemente.
+
+AWS Storage Gateway: En qué consiste Cached volumes?
+Almacenamos nuestros archivos en S3, pero retenemos en los dispositivos on-premises los de acceso frecuente. Solo compatible con iSCSI (forma parte de Volume Gateway).
+
+AWS Storage Gateway: En qué consiste Stored volumes?
+Es un Volume Storage que realiza automativamente una copia en S3 de manera asincrona.
+
+Qué dos tipos encontramos en AWS Storage Gateway: Volume Gateway?
+Stored Volume y cached volumes
+
+Dónde configuramos los database-specific settings de una intancia o grupo de RDS?
+Parameter Group
+
+Cual es el minimo tiempo que se cobra por estar un objeto en cada tipo de buket?
+S3 standard: 0 dias. S3 Glacier: 90 dias. Glacier Deep Archive: 180 dias. Resto (IA): 30 días. Para los bucket IA, deben permanecer al menos 30 dias en el bucket ANTERIOR antes de moverlos a una IA.
+
+Scaling policies: Target Tracking Scaling, en qué consiste?
+Establece el escalado basado en una metrica specifica. Similar a como funciona un termostato en casa.
+
+Scaling policies: Step scaling, en qué consiste?
+Establece el escalado basado en un set de "step ajustements", que varían en funcion del unbrales o "pasos" de una alarma
+
+Scaling policies: Simple scaling, en qué consiste?
+Establece el escalado basado en un unico "single ajustement".
+
+Scaling policies: Scheduled scaling, en qué consiste?
+Establece el escalado basado en patrones de uso previsibles.
+
+EBS Snapshots son point in time, qué significa?
+Funcionan como un repo. Es decir podemos recuperar el estado en unos días atras, sin nececsidad de crear duplicados. Eso hace que un volumen de 10 GB tenga snapshots de peso superior, ya que contienen los cambios que han ido sucediendo.
+
+Qué AWS Trusted Advisor?
+Te provee de guia en tiempo real para ayudarte a gestionar tus recursos de amazon de manera correcta siguiendo las buenas prácticas.
+
+Cuando creamos usuarios IAM de administracion para nuestro equipo? Qué debemos pasarles para que puedan empezar a usarlos?
+Debemos pasarles las contraseñas. Ellos deben encargarse de cambiarlas o lo que sea necesario dependiendo de la politica de la empresa.
+
+Queremos encriptar los logs de nuestra aplicación at rest. Estamos utilizando ClodTrail. Qué debemos hacer?
+CloudTrail usa server side encryption por defecto.
+
+Qué nos permite los VPC Endpoints?
+Permiten contectar de manera privada servicios de AWS y VPCs. Tenemos Interface Endpoints y Gateway Endpoints.
+
+VPC Endpoint: Interface endpoints, que son?
+Permiten contectar de manera privada servicios de AWS y VPCs. En este caso sirve para practicamente todos los servicios de Amazon.
+
+VPC Endpoint: Gateway endpoints, que son?
+Permiten contectar de manera privada servicios de AWS y VPCs. En este caso sirve unicamente para DynamoDB y S3.
+
+Qué protocolo expone Api Gateway?
+HTTPS
 `
