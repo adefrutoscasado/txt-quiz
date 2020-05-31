@@ -630,7 +630,7 @@ AWS Kinesis
 Que nos permite los servicios de Kinesis: Stream / Analytics / Firehouse?
 Streams: Ingesta de streaming de latencia baja a gran escala (big data). Analytics: Aplicar queries SQL en tiempo real. Firehose: Cargar los streams en S3, Redshift, ElasticSearch...
 
-Cuanto tiempo se detiene los datos de un shard de Kinesis?
+Cuanto tiempo se retiene los datos de un shard de Kinesis?
 Por defecto 1 dia. Puede ser hasta 7 dias.
 
 Podemos reproducir datos en SQS, SNS o Kinesis?
