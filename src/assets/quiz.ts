@@ -609,7 +609,7 @@ Permite que el load balancer vaya poco a poco quitando las conexiones a una maqu
 Como podemos hacer que un bucket S3 tenga acceso publico para server archivos estaticos?
 Podemos setear los permisos como publicos durante el upload del atchivo. O Simplemente configurando sus policies para setear todos los objetos como publicos.
 
-Como podemos asegurar la integridad de los datos de un buvcket S3 en un desastre?
+Como podemos asegurar la integridad de los datos de un bucket S3 en un desastre?
 Activando cross-region Replication
 
 Para que sirve AWS X-Ray?
@@ -673,7 +673,7 @@ Que es AWS WorkSpaces?
 Escritorios remotos seguros. Integrados con Microsoft AD.
 
 En Route 53, que es MX Record?
-Es cuando mandamos un MultiValue al que asignamos pesos o prioridades a cada una de las direcciones.
+Mail eXchange Record
 
 AWS DLM que es?
 Data Lifecycle Manager
@@ -779,4 +779,88 @@ Tienen un log propio donde podemos consultar las diferentes peticiones y sus hor
 
 Tenemos un contenedor docker que se encarga de tareas criticas y otras de analitica no esenciales. Que eligiriamos como EC2 para rebajar costes?
 2 tipos, reserved y sport.
+
+Cual es el único campo obligatorio en un template de CloudFormation?
+Resources
+
+Qué son MyISAM y InnoDB?
+Motores de almacenamiento MySQL (diponibles para elegir en RDS). InnoDB es mas estricto y tiene mayor capacidad de recuperación de crashes (Recomendado por AWS). En cambio MyISAM tiene mas rendimiento.
+
+Hemos reiniciado una instancia EC2 en un VPC. Cambiará su IP privada?
+No. En cambio si estamos en EC2 Classic y no VPC, recibirá una nueva.
+
+Cuanto tiempo toma a SG hacer efectivos los cambios?
+Son efectivos inmediatamente.
+
+AWS VPC soporta Multicast?
+No, hay que contruir un IP level multicast across a network on the OS level of the instance.
+
+Con qué servicio podemos desplegar en el mismo instante una nueva aplicación en un grupo de recursos?
+AWS CodeDeploy
+
+Qué recomendaciones existen para Placement Group, cuál es el limite de cantidad de instancias?
+Lanzar todas las instancias A LA VEZ (lanza errores de insufficient capacity). Piensa que las instancias se reparten la capacidad cuando son iniciadas. Qué todas las instancias sean similares en cuanto a recursos. No existe límite.
+
+Qué puerto utilizan los escritorios virtuales?
+3389
+
+Qué protocolo utilizan los escritorios virtuales?
+TCP y UDP debe estar disponible en el SG.
+
+Estamos utilizando S3 y Cloud Front sirve nuestra imagenes. Hemos cambiado un archivo pero el cliente no recibe la nueva imagen. De alguna forma se está cacheando. Qué podemos hacer para solucionarlo de la forma mas barata posible?
+Podríamos invalidarlo en CloudFront pero sería muy caro. Usariamos versionado. Versioning enables you to control which file a request returns even when the user has a version cached either locally or behind a corporate caching proxy. If you invalidate the file, the user might continue to see the old version until it expires from those caches.
+
+IPsec qué es?
+(Internet Protocol security) Hace referencia a la conexión encriptada que utiliza Site-to-Site VPN.
+
+Qué es Amazon Connect?
+El servicio que vende y utiliza amazon para dar soporte y servicio de contacto para clientes.
+
+Cómo movemos un EBS de un AZ a otro?
+Creamos un snapshot y creamos un nuevo volumen en la nueva AZ usando el snapshot.
+
+Cuando creamos un usuario a traves de CLI, qué permisos tiene por defecto?
+Si lo creamos mediante contraseña ninguno. Si le asignamos Access Keys, los asociados a la misma.
+
+Que son los Access Keys?
+Permite llamar a servicios de amazon desde el CLI de Amazon. Siempre estan asociados a un usuario.
+
+En qué condiciones un ElasticIP no incurre cargos?
+Cuando esta asociada a una EC2, ésta está corriendo y sólo hay una EIP asociada a esa instancia.
+
+AWS BeanStalk. Donde se guardan los archivos de la app? Dónde se guarda los logs que genera?
+S3. S3 o CloudWatch.
+
+Qué es AWS Organizations?
+AWS Organizations offers policy-based management for multiple AWS accounts. With Organizations, you can create groups of accounts, automate account creation, apply and manage policies for those groups. Organizations enables you to centrally manage policies across multiple accounts,.
+
+AWS hosts a variety of public datasets such as satellite imagery, geospatial, or genomic data that you want to use for your web application hosted in Amazon EC2.If you use these datasets, how much will it cost you?
+No charge.
+
+Que pasa si en CloudFront ponemos a 0 el Cache control max age?
+Les peticiones viajarían directamente a las máquinas y no serían cacheadas en CloudFront
+
+Qué es Blue/Green deployment?
+Levantar una nueva aplicación con la actualización usando recursos totalmente nuevos (con el gasto que conlleva). Se puede testear y luego hace el switch para dirigir a la nueva aplicación (green)
+
+Necesitamos que nuestros administradores puedan acceder a la diferentes cuentas que componen nuestro AWS Organization, que debemos utilizar?
+IAM cross-account access.
+
+Qué es CLUDHSM?
+Un servicio que permite almacenar claves en un module de hardware dedicado de un tercero y validado en cuanto a seguridad.
+
+En qué momento nos puede ayudar MultiAZ además de con la caída de una zona?
+Mientras se producen OS patches, system upgrades o db instance scaling.
+
+Como podemos usar HTTPS en un RDS de AWS si se nos requiere (2 opciones!)?
+Opción 1: Descargar el Root CA Certificate de Amazon y permitir solo el puerto 443 en el SG. Opcion 2: Si usamos IAM en el RDS automaticamente la comunicación se hará mediante el uso de un SSL.
+
+Qué requisito tiene el poder usar cross-region replication en S3?
+Versionado. Piensa como si fueran el replicado async que hace RDS, necesitamos orden para poder replicar!
+
+Necesitamos VPC peering entre diferentes regiones, que podemos usar?
+Inter-Region VPC Peering
+
+MultiPart Upload es secuencial o paralelo?
+Paralelo, por lo que aumenta la velocidad final de la subida.
 `
