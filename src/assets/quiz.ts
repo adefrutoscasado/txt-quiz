@@ -172,7 +172,7 @@ Que es Aurora Serverless y que diferencia hay con Aurora normal?
 Automaticamente inicia, apaga o escala la capacidad basada en las necesidades. Buenas para spikes de uso.
 
 Podemos usar IAM EN Elasticache (Redis, Memcached)?
-No, usamos un token (RedisAuth para redis)
+No, usamos un token (RedisAuth para redis). NO tiene integracion IAM como RDS.
 
 Podemos hacer backups de Elasticache?
 Solo de Redis.
@@ -491,9 +491,6 @@ No
 
 Tenemos una VPC con varias maquinas EC2 a las que podemos acceder por internet. Hemos añadido una que tiene el SG de las otras pero no podemos acceder. Cual puede ser el problema?
 Asigna un Elastic IP
-
-Que nos permite Kinesis Data Firehose?
-Una forma sencilla de cargar y analizar streams en near real time. Totalmente gestionado por Amazon y con autoescalado para aceptar la cualquier carga de datos. Prepara y carga los datos para ser analizados por el destino que elijas.
 
 Necesitamos real-time processing of streaming big data. Que podemos utilizar?
 Kinesis Data Firehouse (Prepara y carga los datos de manera continua y los destina al servicio de tu eleccion) + Kinesis Data Streams (Real time processing)
