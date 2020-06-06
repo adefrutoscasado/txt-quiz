@@ -156,11 +156,11 @@ ASYNC, toma tiempo para propagarse. (Eventually consistent)
 En RDS, cuantas read replicas podemos tener maximo?
 5
 
-Para que RDS podemos utilizar IAM para loguearnos de manera nativa?
+Para que RDS podemos utilizar IAM (RDS Auth Service) para loguearnos de manera nativa usando un token?
 MySQL y PostgreSQL (Oracle no)
 
 Como creamos un token temporal de acceso a RDS?
-Con RDS Auth Service, no STS
+Con RDS Auth Service (IAM authentication), no STS
 
 Unica tecnologia AWS de base de datos que soporta multi region?
 Aurora
@@ -543,7 +543,7 @@ Una especie de Firebase de Amazon. Usa GraphQL, real time subscriptions, Dynamo/
 Diferencia entre Cost Explorer y AWS Budget?
 Cost explorer te permite visualizar como gastas el dinero en Amazon. AWS Budget te permite establecer presupuestos y controlarlo (alertas email incluidas).
 
-Son las ENI desconectadas de una EC2 cuando estas se detienen?
+Cuando las ENI se desconectan de una EC2, estas se detienen?
 No
 
 EC2 Reserved Instances, como varia el precio cuando una instancia esta corriendo, parando o terminada?
@@ -610,7 +610,7 @@ Como podemos asegurar la integridad de los datos de un bucket S3 en un desastre?
 Activando cross-region Replication
 
 Para que sirve AWS X-Ray?
-Para trazar y analizar las peticiones que viajan a desde API Gateway (o microservicios) hasta los servicios que llama.
+Para trazar, debuguear y analizar las peticiones que viajan a desde API Gateway (o microservicios) hasta los servicios que llama, de forma que podamos detectar fallos de rendimiento.
 
 Protocolo de ping?
 IMCP
@@ -843,8 +843,8 @@ Levantar una nueva aplicación con la actualización usando recursos totalmente 
 Necesitamos que nuestros administradores puedan acceder a la diferentes cuentas que componen nuestro AWS Organization, que debemos utilizar?
 IAM cross-account access.
 
-Qué es CLUDHSM?
-Un servicio que permite almacenar claves en un module de hardware dedicado de un tercero y validado en cuanto a seguridad.
+Qué es CLOUDHSM?
+Un servicio que permite almacenar claves en un modulo de hardware dedicado de un tercero y validado en cuanto a seguridad.
 
 En qué momento nos puede ayudar MultiAZ además de con la caída de una zona?
 Mientras se producen OS patches, system upgrades o db instance scaling.
@@ -860,4 +860,49 @@ Inter-Region VPC Peering
 
 MultiPart Upload es secuencial o paralelo?
 Paralelo, por lo que aumenta la velocidad final de la subida.
+
+Qué es AWS Resource Access Manager (RAM)?
+Permite compartir de forma segura recursos de Amazon cross-account o en combinación con AWS Organization.
+
+Qué nos permite Signed Cookies de Cloudfront?
+Las Signed Cookies de CloudFront permiten controlar quién puede obtener acceso a su contenido cuando no desea cambiar las URL actuales o cuando desea proporcionar acceso a varios archivos restringidos
+
+Qué significa el parámetro --is-multi-region-trail en CloudTrail?
+Sirve para trackear todos los cambios realizados en TODAS las regiones.
+
+Qué significa el parámetro --include-global-service-events en CloudTrail?
+Sirve para trackear todos los eventos realizados y llamadas API desde CLI y AWS Console.
+
+Qué es Enhanced Monitoring?
+Un tipo de monitoreo disponible en RDS que nos brinda una mayor precisión debido a que reside en una capa más fisica de la máquina. Nos ofrece más información de como se gestionan los thread en la CPU
+
+Qué significa POSIX-compliant?
+Being POSIX-compliant for an OS means that it supports those standards (e.g., APIs), and thus can either natively run UNIX programs, or at least porting an application from UNIX to the target OS is easy/easier than if it did not support POSIX
+
+Qué es un cluster endpoint en Aurora?
+Se conoce tambien como writer endpoint ya que conecta con la base de datos primaria de Aurora.
+
+Qué es un instance endpoint en Aurora?
+Conecta con una instancia específica en Aurora. El cliente toma la decisión de a qué instancia quiere dirigir su petición, en vez de dejar a Aurora decidir.
+
+Qué es un reader endpoint en Aurora?
+Conecta al pool de las read replicas disponibles en Aurora.
+
+Permite Aurora crear custom endpoints en base a nuestro criterio y necesidades?
+Sí
+
+AWS Directory Service Simple AD vs AWS Directory Service AD Connector, que son?
+Simple AD es un subset de características para gestionar los usuarios de Microsoft. AD Connector ofrece la conexión entre tu AD y AWS.
+
+Qué instancias EC2 pueden ser "convertidas" a una de mayor capacidad?
+Únicamente Convertible Reserved Instances
+
+Lista de servicios que permiten el acceso al underlying OS?
+Amazon EMR, EC2, ECS, Beanstalk, OpsWorks.
+
+Aumentamos los IOPS de una instancia EC2 al aumentar su capacidad, al igual que GP EBS?
+Sí
+
+Qué es CloudFront Origin Failover?
+Es el High Availability de CloudFront. Permite que, en caso de que un servicio al que está apuntando devuelva error, redirigir la petición a otro que ofrezca el mismo servicio.
 `
