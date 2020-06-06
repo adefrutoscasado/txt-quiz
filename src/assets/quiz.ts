@@ -340,7 +340,7 @@ Dynamo On demand vs Dynamo standard (auto escaled). Que usaremos en produccion y
 On demand > development. Standard > Produccion
 
 Que es dynamoDB DAX:
-A cache layer to improve dynamoddb read cpacity.
+A cache layer to improve dynamodb read AND WRITE capacity.
 
 AWS Api Gateway, que podemos utilizar para evitar picos/bursts/spikes:
 Throttling limits. Manda un 429 too many requests cuando un usuario sobrepasa el limite de uso. El cliente tendra que repetir la operacion.
@@ -905,4 +905,40 @@ Sí
 
 Qué es CloudFront Origin Failover?
 Es el High Availability de CloudFront. Permite que, en caso de que un servicio al que está apuntando devuelva error, redirigir la petición a otro que ofrezca el mismo servicio.
+
+CloudFormation: Resources, qué es?
+Recursos de AWS que usaremos declarados en el template
+
+CloudFormation: Parameters, qué es?
+Inputs dinámicos que recibirá nuestro template (por ejemplo, numero de instancias que queremos levantar)
+
+CloudFormation: Mappings, qué es?
+Variables estáticas para nuestro template (imagino que serán constantes, por ejemplo un nombre)
+
+CloudFormation: Outputs, qué es?
+Referencias creadas para los recursos creados por la template.
+
+CloudFormation: Conditionals, qué es?
+Lista de conficiones para llevar a cabo la creación de un recurso.
+
+Qué es WorkDocs?
+WorkDocs es un servicio de almacenamiento cloud de archivos que compite con DropBox, Google Drive, OneDrive...
+
+Qué es un ENI (Elastic Network Interface)?
+Es un componente logico en una VPC que representa un tarjeta de red virtual, y nos permite dirigir tráfico a nuestra instancia
+
+Queremos usar en Route 53 la direccion NON-ROOT: something.mydomain.com, qué tipo de target utilizaremos?
+ALIAS o CNAME
+
+Queremos usar en Route 53 la direccion ROOT: mydomain.com, qué tipo de target utilizaremos?
+ALIAS
+
+Como podemos hacer que varias queries queden registradas en DynamodDB pero si una falla, se haga rollback?
+Utilizando Transacciones de DynamoDB
+
+En qué consiste DynamoDB on demand?
+No tenemos que proveer a dynamoDB de una capacidad WCU/RCU, sino que escala automaticamente. 2.5x mas caro
+
+Cómo conseguimos cross-region replication en DynamoDB?
+Usando Global Tables. Este tipo de tablas son replicadas a otra region de forma activa-activa (da igual la tabla que escribamos, se replicará a las demás, no existe una primaria que gobierne sobre las demas). Util para disaster recovery o BAJA LATENCIA en regiones!
 `
