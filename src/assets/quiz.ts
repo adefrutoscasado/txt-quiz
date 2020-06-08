@@ -132,6 +132,9 @@ STI HDD es para datos accedidios frecuentemente (Big data, "necesito mucho espac
 Cual es el unico tipo de EBS en el que los IOPS aumentan con el tamaño?
 GP2 (general purpose)
 
+Cual es el unico tipo de EBS en el que los IOPS aumentan con la demanda (bursts)?
+GP2 (general purpose)
+
 EBS SNapshots, que pas acuando estamos haciendo uno en un EBS?
 Lo podemos utilizar, unicamente bajan los IOPS.
 
@@ -246,11 +249,8 @@ Los S3 access logs no contienen esta info. Debemos usar S3 CloudTrail.
 Que nos permite Athena?
 Servicio serverless que permite usar lenguage SQL para S3. Para realizar analitica. Se paga por query.
 
-Como configuramos los permisos en Cloudfront?
-Mediante OAI (Origin Access Identity)
-
-Como configuramos los permisos en Cloudfront para S3?
-Mediante OAI (Origin Access Identity) y acttualizando los Bucket policies de S3.
+Como configuramos los permisos en Cloudfront para S3 de forma que solo sea accesibles a través de CloudFront?
+Mediante OAI (Origin Access Identity) y actualizando los Bucket policies de S3.
 
 Como permitimos el acceso desde un Cloudfront Edge a una maquina EC2?
 Aceptando la IP pulica del edge location.
@@ -344,6 +344,9 @@ A cache layer to improve dynamodb read AND WRITE capacity.
 
 AWS Api Gateway, que podemos utilizar para evitar picos/bursts/spikes:
 Throttling limits. Manda un 429 too many requests cuando un usuario sobrepasa el limite de uso. El cliente tendra que repetir la operacion.
+
+Como podemos mejorar el rendimiento de AWS API Gateway cuando tenemos contenido muy estático?
+Activando API Gateway caching.
 
 Que es AWS SAM:
 Serverless Applitacion Model. Un framework de Amazon para crear apps serverless con Lambda, DynamoDB. API Gateway y Cognito.
@@ -941,4 +944,19 @@ No tenemos que proveer a dynamoDB de una capacidad WCU/RCU, sino que escala auto
 
 Cómo conseguimos cross-region replication en DynamoDB?
 Usando Global Tables. Este tipo de tablas son replicadas a otra region de forma activa-activa (da igual la tabla que escribamos, se replicará a las demás, no existe una primaria que gobierne sobre las demas). Util para disaster recovery o BAJA LATENCIA en regiones!
+
+En qué consiste la estrategia de disaster recovery Pilot Light?
+La parte core crítica de la app está corriendo siempre en el cloud. 
+
+En qué consiste la estrategia de disaster recovery Warm Standby?
+Una aplicacion COMPLETA en STANDBY esta corriendo, pero en el mínimo tamaño, de manera que podamos escalarla rápido.
+
+En qué consiste la estrategia de disaster recovery Multi Site?
+Varias aplicaciones COMPLETAS están corriendo a la vez y se encuentran activas. (Se reparten la carga)
+
+En disaster Recovery, qués es RPO y RTO?
+Recovery Point Objetive y Recovery Time Objetive (punto del tiempo que podemos recuperar HASTA el desastre y tiempo que tardamos en recuperarlo DESDE el desastre).
+
+A la vez, necesitamos que las urls de CloudFront expiren. Que funcion de CloudFront podemos utilizar?
+CloudFront signed URLs
 `
