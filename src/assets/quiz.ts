@@ -192,9 +192,6 @@ URL to URL
 En Route 53 que es redireccion hace un Record Alias?
 URL to AWS Recource
 
-Que tipo de Route 53 neceistamos para usar subdominios (o "Non-root") something.mydomain.com?
-CNAME
-
 En que consiste Route 53 simple routing policy?
 El cliente recibe varias direcciones IP para un dominio y la direccion se elige aleatoriamente por el cliente, puede utilizarse para balancear.
 
@@ -340,7 +337,7 @@ Dynamo On demand vs Dynamo standard (auto escaled). Que usaremos en produccion y
 On demand > development. Standard > Produccion
 
 Que es dynamoDB DAX:
-A cache layer to improve dynamodb read AND WRITE capacity.
+A cache layer to improve dynamodb READ y WRITE capacity (principalmente READ).
 
 AWS Api Gateway, que podemos utilizar para evitar picos/bursts/spikes:
 Throttling limits. Manda un 429 too many requests cuando un usuario sobrepasa el limite de uso. El cliente tendra que repetir la operacion.
@@ -373,7 +370,7 @@ Durante cuanto tiempo es valido el token de STS?
 Hasta 1 hora
 
 Que servicios nos permiten acceder a servicios de AWS sin tener un IAM explicito asignado?
-Cognito y STS.
+STS y Cognito (aunque se principal funcion es autenticar al usuario, no proveer al usuario de acceso a los recursos de AWS).
 
 Necesitamos un identity Fereation pero nuestro sistema no es compatible con SAML2, que podemos utilizar?
 Custom Identity Broker Application
@@ -493,7 +490,7 @@ Proveen colas SQS el orden de los mensajes?
 No
 
 Tenemos una VPC con varias maquinas EC2 a las que podemos acceder por internet. Hemos añadido una que tiene el SG de las otras pero no podemos acceder. Cual puede ser el problema?
-Asigna un Elastic IP
+Debe tener asignada una public IP o, en su defecto, una Elastic IP
 
 Necesitamos real-time processing of streaming big data. Que podemos utilizar?
 Kinesis Data Firehouse (Prepara y carga los datos de manera continua y los destina al servicio de tu eleccion) + Kinesis Data Streams (Real time processing)
@@ -946,7 +943,7 @@ Cómo conseguimos cross-region replication en DynamoDB?
 Usando Global Tables. Este tipo de tablas son replicadas a otra region de forma activa-activa (da igual la tabla que escribamos, se replicará a las demás, no existe una primaria que gobierne sobre las demas). Util para disaster recovery o BAJA LATENCIA en regiones!
 
 En qué consiste la estrategia de disaster recovery Pilot Light?
-La parte core crítica de la app está corriendo siempre en el cloud. 
+La parte core crítica de la app y su entorno está corriendo siempre en el cloud, de manera que podamos proveer rápidamente una aplicación completa.
 
 En qué consiste la estrategia de disaster recovery Warm Standby?
 Una aplicacion COMPLETA en STANDBY esta corriendo, pero en el mínimo tamaño, de manera que podamos escalarla rápido.
@@ -959,4 +956,25 @@ Recovery Point Objetive y Recovery Time Objetive (punto del tiempo que podemos r
 
 A la vez, necesitamos que las urls de CloudFront expiren. Que funcion de CloudFront podemos utilizar?
 CloudFront signed URLs
+
+Quién se encarga del OS Patching de EC2? AWS o nosotros?
+Nosotros
+
+Quién se encarga de gestionar el underlying network infraestructure de AWS? AWS o nosotros?
+AWS
+
+Network ACL qué es?
+Es el "SG" para subnets, controla qué IPs tienen acceso inbound y outbound
+
+Qué significa "warm attach" en ENI?
+We attach the interface when the instance is STOPPED
+
+Qué significa "hot attach" en ENI?
+We attach the interface when the instance is RUNNING
+
+Qué significa "cold attach" en ENI?
+We attach the interface when the instance is BEING LAUNCHED
+
+Provee S3 de AES128 encryption?
+NO, solo AES256
 `
