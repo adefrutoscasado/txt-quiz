@@ -511,7 +511,7 @@ Cual es el tamaño maximo de un objeto S3?
 5 Tb
 
 Para que sirve S3 Transfer Acceleration?
-Permite transferencias rapidas, faciles y seguras en S3. Ayudandose de las AWS Edge locations de Cloudfrount.
+Permite transferencias rapidas, faciles y seguras en S3. Ayudandose de las AWS Edge locations de Cloudfrount (segun Stephane solo subidas).
 
 Puede haber cuantas AZ por subnet?
 1 por AZ
@@ -891,8 +891,8 @@ Conecta al pool de las read replicas disponibles en Aurora.
 Permite Aurora crear custom endpoints en base a nuestro criterio y necesidades?
 Sí
 
-AWS Directory Service Simple AD vs AWS Directory Service AD Connector, que son?
-Simple AD es un subset de características para gestionar los usuarios de Microsoft. AD Connector ofrece la conexión entre tu AD y AWS.
+"AWS Directory Service: Managed Microsft AD" vs "AWS Directory Service: Simple AD" vs "AWS Directory Service: AD Connector", que son?
+Managed Microsft AD: Create your own AD in AWS (manage users locally on premises). Simple AD es un AD maneja enteramente en AWS. AD Connector es un PROXY para tener el AD en tu entorno on-premises.
 
 Qué instancias EC2 pueden ser "convertidas" a una de mayor capacidad?
 Únicamente Convertible Reserved Instances
@@ -977,4 +977,40 @@ We attach the interface when the instance is BEING LAUNCHED
 
 Provee S3 de AES128 encryption?
 NO, solo AES256
+
+Cuando hacemos Stop en una instancia que ocurre con los datos?
+Se mantienen intactos
+
+Cuando terminamos una instancia que ocurre con los datos?
+Se eliminan
+
+Que ventajas tiene EC2 Hibernate sobre Stop o Terminate?
+La RAM no se pierde, así que el boot será mas rapido. La memoria RAM antes de detenerse se guardara en el root volume. (No puede hibernar mas de 60 dias)
+
+ELB: Connection draining, con qué terminos se le reconoce según el tipo de balanceador?
+Classic: Connection draining. Application y Network: Deregistration Delay.
+
+Como se llama el EFS especial para Windows?
+Amazon FSx
+
+Qué es Amazon FSx?
+Es el EFS especial para Windows (EFS no es compatible, debido a que es POSIX/Basado en Linux)
+
+Que protocolos de almacenamiento soporta Amazon FSx?
+SMB y NTFS
+
+Para qué sirve Amazon FSx for Lustre?
+(Lustre = Linux + Cluster, No tiene nada que ver con Windows!). Es un tipo de almacenamiento distribuido paralelamente, especial para Machine Learning, High Performance Computing. Usa S3 under the hood.
+
+Pongamos que tengo 5 camiones que mandan informacion a Kinesis sobre su localizacion. Tan solo tengo 3 shards. Como se repartira la informacion?
+Se repartiran uniformemente pero siempre manteniendo el shard. Ejemplo: 1,2 -> A | 3,4 -> B | 5 -> C
+
+Qué nos permite AWS Config?
+Permite auditar y llevar un histórico de la configuración de los servicios de Amazon.
+
+Queremos pasar datos de un EFS en la region 1 a otro EFS en la region 2. Que podemos utilizar?
+AWS DataSync
+
+EC2-Classic, que es?
+Era la antigua forma en la que corrian las maquinas de Amazon. En vez de haber VPCs que isolaban la cuenta, todos los clientes compartian la misma red
 `
