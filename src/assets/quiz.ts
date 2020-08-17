@@ -318,8 +318,8 @@ Escalado en dos incrementos por intervalos
 Como se despliega una Lambda function en Linear?
 Escalado de forma lineal por minutos (escalones de 1 minutos asta completar el 100%)
 
-Timeout de una funcion de duracion de ejecucion lambda?
-15 minutos
+Timeout de una funcion de duracion de ejecucion lambda? Podemos cambiarla?
+15 minutos MAXIMO. No se puede aumentar.
 
 Max deplotment size of lamba function?
 50 Mb
@@ -985,7 +985,7 @@ Cuando terminamos una instancia que ocurre con los datos?
 Se eliminan
 
 Que ventajas tiene EC2 Hibernate sobre Stop o Terminate?
-La RAM no se pierde, así que el boot será mas rapido. La memoria RAM antes de detenerse se guardara en el root volume. (No puede hibernar mas de 60 dias)
+La RAM no se pierde, así que el boot será mas rapido. La memoria RAM antes de detenerse se guardara en el root volume. El volumen tambien se guarda (obviamente, ahi es donde está la info de la RAM) (No puede hibernar mas de 60 dias)
 
 ELB: Connection draining, con qué terminos se le reconoce según el tipo de balanceador?
 Classic: Connection draining. Application y Network: Deregistration Delay.
@@ -1013,4 +1013,32 @@ AWS DataSync
 
 EC2-Classic, que es?
 Era la antigua forma en la que corrian las maquinas de Amazon. En vez de haber VPCs que isolaban la cuenta, todos los clientes compartian la misma red
+
+El diseño de una base de datos para una aplicacion Online Transaction Processing (OLTP) es relacional o no relacional?
+Relacional
+
+Estamos usando una base de datos RDS y queremos que se encripte, como podemos hacerlo?
+Take a snapshot of the database, copy it as an encrypted snapshot, and restore a database from the encrypted snapshot. Terminate the previous database.
+
+S3 Event notification, qué nos permite?
+Mandar notificaciones cuando ciertos eventos ocurren en el bucket. (SQS, ...)
+
+En RDS si usamos encriptacion en la instancia principal, el resto cómo estará?
+Encriptado tambien.
+
+Podemos mandar un archivo directamente a S3 Glacier?
+No, hay que mandarlo a S3 primero y luego usar un lifecycle.
+
+EFS IA qué es?
+Es una version de EFS que puede llegar a costar 92% menos que el standard. Para archivos que se acceden de manera infrecuente.
+
+Queremos crear un Auto Scaling Group que use una mezcla de Spot y On-Demand. Qué podemos usar?
+ASG Launch templates soportan este tipo de escalado
+
+Como podemos crear efecto Availability Zone si tenemos asignado un Elastic IP a una maquina en concreto?
+Debemos usar EC2 user-data para hacer ese cambio de maquina de la IP, en el caso de que se levantase una nueva al caerse la otra.
+
+
 `
+
+// Revisar Spot fleet
