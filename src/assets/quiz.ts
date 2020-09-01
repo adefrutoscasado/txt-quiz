@@ -1038,6 +1038,21 @@ ASG Launch templates soportan este tipo de escalado
 Como podemos crear efecto Availability Zone si tenemos asignado un Elastic IP a una maquina en concreto?
 Debemos usar EC2 user-data para hacer ese cambio de maquina de la IP, en el caso de que se levantase una nueva al caerse la otra.
 
+Una compañia tiene multiples AWS Organizations en multiples AWS Accounts. Necesitamos limitar una accion concreta para todas las cuentas y manejar esta restriccion de manera central. Qué podemos utilizar?
+SCP (Service Control Policies) permite control central para el maximo nivel de gestion de permisos para todas las cuentas de una organizacion (incluso si son admin!).
+
+Qué evento puede hacer que una base de datos RDS deje de dar servicio?
+DB engine version change
+
+Como podemos mejorar la latencia de un endpoint de AWS API Gateway?
+Ya que por defecto API Gateway sirve desde el nearest point de cloudfront, no hay razon para usar cloudfront "encima". Habria que configurar un TTL y usar cache (no especifica como)
+
+Como podemos aumentar el rendimiento de una base de datos a la vez que aumentamos su availability?
+Creamos un RDS Replica como MultiAZ. Esto creara una db standby en otro AZ diferente a la original. Lo normal.
+
+Como podemos ver la memoria consumida en Amazon Aurora?
+Activando Enhanced Monitoring de Aurora.
+
 
 `
 
