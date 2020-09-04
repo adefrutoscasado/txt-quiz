@@ -747,6 +747,9 @@ Establece el escalado basado en patrones de uso previsibles.
 EBS Snapshots son point in time, qué significa?
 Funcionan como un repo. Es decir podemos recuperar el estado en unos días atras, sin nececsidad de crear duplicados. Eso hace que un volumen de 10 GB tenga snapshots de peso superior, ya que contienen los cambios que han ido sucediendo.
 
+EBS Snapshots son point in time por defecto?
+Sí
+
 Qué AWS Trusted Advisor?
 Te provee de guia en tiempo real para ayudarte a gestionar tus recursos de amazon de manera correcta siguiendo las buenas prácticas.
 
@@ -1053,7 +1056,27 @@ Creamos un RDS Replica como MultiAZ. Esto creara una db standby en otro AZ difer
 Como podemos ver la memoria consumida en Amazon Aurora?
 Activando Enhanced Monitoring de Aurora.
 
+Queremos acceder a dynamoDb desde una private subnet de nuestro VPC. Como podemos hacerlo?
+Creat un VPC Gateway endpoint y añadir una entrada a la route table del VPC.
 
+Cuando colocamos un cloudfront en frente de un ALB que apunta a una app web, como mejora la aplicacion?
+Se cachean los contenidos estaticos y reduce las peticiones al ALB. Por lo que se necesita menos maquinas en el ASG
+
+Necesitamos ver el log de acceso a nuestro bucket S3. Como podemos hacerlo?
+Activar enable access monitoring de S3.
+
+Como podemos programar backups de DynamoDB?
+DynamoDb on-demand backup nos permite crear backups. Para programarlos necesitariamos utilizar cloudwatch + lambda ya que no tiene sistema para scheduling.
+
+Podemos usar las instancia multi-AZ de Aurora como read replicas?
+Sí, para Aurora sí! Super guais los de amazon
+
+Qué dos acciones se pagan en KMS?
+API requests por uso de claves y almacenar customer keys.
+
+Cómo podemos trackerar la ram en una EC2?
+EC2: Install the CloudWatch agent on the EC2 instance to push memory usage to an Amazon CloudWatch custom metric.
+
+Amazon Cognito User Pool vs Amazon Cognito Identity Pool. Qué permiten?
+User pools nos permite crear nuestra "piscina" de usuario (registro, login, pass recovery...). Identity nos permite autenticarlos contra servicios de  terceros (S3, DynamoDb, APIGateway...)
 `
-
-// Revisar Spot fleet
