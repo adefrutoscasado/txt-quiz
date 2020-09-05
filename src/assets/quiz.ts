@@ -93,6 +93,10 @@ Dejamos de mandar peticiones. No la terminamos ni la reiniciamos.
 Que load balancer soporta enrutamiento por path?
 Application Load balancer. Puede ser en funcion de hostname, path y query string.
 
+
+Como podemos dirigir las peticiones a las maquinas en funcion del path de la ruta?
+Usando ALB (Puede ser en funcion de hostname, path y query string). Route 53 NO
+
 Qué load balancer tiene una IP estatica por AZ?
 Network load balancer
 
@@ -1079,4 +1083,21 @@ EC2: Install the CloudWatch agent on the EC2 instance to push memory usage to an
 
 Amazon Cognito User Pool vs Amazon Cognito Identity Pool. Qué permiten?
 User pools nos permite crear nuestra "piscina" de usuario (registro, login, pass recovery...). Identity nos permite autenticarlos contra servicios de  terceros (S3, DynamoDb, APIGateway...)
+
+DynamoDB on-demand: necesitamos que escale. Qué característica podemos usar?
+DynamoDB on-demand escala automaticamente ya que no lo decimos que capacidad queremos. Siempre escalara en funcion de la carga. (Sino seria provisioned)
+
+Que es Task Definition en AWS ECS?
+Define el container. Principalmente: imagen docker, cantidad cpu/ram, IAM Role
+
+Como podemos utilizar HTTPS en load balancers?
+Use an Application Load Balancer (ALB) with an HTTPS listener, then install SSL certificates on the ALB and EC2 instances. Use a Network Load Balancer (NLB) with a TCP listener, then terminate SSL on EC2 instances
+
+Qué es Elastic Fabric Adapter (EFA)?
+Its a network device similar to ENI that you can attach to an EC2 to accelerate High Performance Computing (HPC) and machine learning applications.
+
+Qué es Elastic Network Adapter (ENA)?
+Sirve para cuando necesitamos gran ancho de banda y latencia inter-estancia mas baja
 `
+
+// ECS vs Fargate
