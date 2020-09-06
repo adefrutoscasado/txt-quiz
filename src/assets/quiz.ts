@@ -1018,6 +1018,9 @@ Permite auditar y llevar un histórico de la configuración de los servicios de 
 Queremos pasar datos de un EFS en la region 1 a otro EFS en la region 2. Que podemos utilizar?
 AWS DataSync
 
+Cuales el principal servicio para mover grandes cantidades de datos entre regiones o volumenes on-premises?
+AWS DataSync
+
 EC2-Classic, que es?
 Era la antigua forma en la que corrian las maquinas de Amazon. En vez de haber VPCs que isolaban la cuenta, todos los clientes compartian la misma red
 
@@ -1098,6 +1101,26 @@ Its a network device similar to ENI that you can attach to an EC2 to accelerate 
 
 Qué es Elastic Network Adapter (ENA)?
 Sirve para cuando necesitamos gran ancho de banda y latencia inter-estancia mas baja
+
+Qué es S3 Intelligent-Tiering storage class?
+Its designed to optimize costs by automatically moving data to the most cost-effective access tier, without performance impact or operational overhead. This is ideal when the access patterns are not well understood.
+
+Qué podemos utilizar para mejorar la latencia de una app que sirve en una IP publica estatica?
+AWS Global Accelerator. Cloud front no puede servir IP publica estatica!!
 `
 
 // ECS vs Fargate
+// Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
+
+/*
+Estudiar: 
+
+tema de logins y federations. 
+Repaso a redshift. X
+Repado a los backups esos de S3 de volumenes on premise. 
+Hojitas de cosas colganderas. 
+Repasar ciclos de S3 (cuando tiempo debe estar en cada uno). X
+PirvateLink no se mucho
+Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
+SSE S3 existe? Sí existe. Revisar formas de encrptiado SEE-C, SSE-S3...y demas
+*/
