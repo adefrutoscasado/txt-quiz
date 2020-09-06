@@ -311,7 +311,7 @@ Cual es la capacidad de escritrua y de lectura de un shard de Kinesis?
 1 Mb y 2 Mb.
 
 En que servicios podemos cargar datos usando Kinesis Data Firehouse?
-Redhist, Amazon S3, ElasticSearch y Splunk.
+Redshift, Amazon S3, ElasticSearch y Splunk.
 
 Queremos acceder desde lamba a una RDS, como debemos usar los permisos?
 Deberiamos asignar permisos a la IAM de Lamba en RDS.
@@ -1107,6 +1107,12 @@ Its designed to optimize costs by automatically moving data to the most cost-eff
 
 Qué podemos utilizar para mejorar la latencia de una app que sirve en una IP publica estatica?
 AWS Global Accelerator. Cloud front no puede servir IP publica estatica!!
+
+Cómo podemos reducir el tiempo de retrieve de DynamoDB from milliseconds to microseconds?
+Usando DAX. ElasticCache no reduce tanto. (1x52)
+
+Podemos aumentar o reducir la cantidad de Contenedores Tasks con CludWatch o necesitamos Lambda?
+Sí se puede desde Cloudwatch 
 `
 
 // ECS vs Fargate
@@ -1123,4 +1129,5 @@ Repasar ciclos de S3 (cuando tiempo debe estar en cada uno). X
 PirvateLink no se mucho
 Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
 SSE S3 existe? Sí existe. Revisar formas de encrptiado SEE-C, SSE-S3...y demas
+Puertos y protocolos. Se me han olvidado
 */
