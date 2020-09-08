@@ -725,7 +725,7 @@ AWS Storage Gateway: En qué consiste Cached volumes?
 Almacenamos nuestros archivos en S3, pero retenemos en los dispositivos on-premises los de acceso frecuente. Solo compatible con iSCSI (forma parte de Volume Gateway).
 
 AWS Storage Gateway: En qué consiste Stored volumes?
-Es un Volume Storage que realiza automativamente una copia en S3 de manera asincrona.
+Es un Volume Storage que realiza automaticamente una copia en S3 de manera asincrona.
 
 Qué dos tipos encontramos en AWS Storage Gateway: Volume Gateway?
 Stored Volume y cached volumes
@@ -1112,22 +1112,33 @@ Cómo podemos reducir el tiempo de retrieve de DynamoDB from milliseconds to mic
 Usando DAX. ElasticCache no reduce tanto. (1x52)
 
 Podemos aumentar o reducir la cantidad de Contenedores Tasks con CludWatch o necesitamos Lambda?
-Sí se puede desde Cloudwatch 
+Sí se puede desde Cloudwatch
+
+Route 53 Geoproximity. Qué permite?
+Let Route 53 route traffic to specific instances based on the location of the INSTANCES AND the USERS
+
+Qué servicio se salta la restricción de permanecer en S3 antes de mover los datos Glacier Deep Archive?
+DataSync! Es el servicio especial para mover grandes cantidades de archivos (tanto on-premises como inter-region), por lo que tiene logica que pueda.
 `
 
 // ECS vs Fargate
 // Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
 
+// clasic load balancer + unique ip + servir mediante SSL. -> Cloudfront + SNI? Sí
+// HIPAA no recuerdo
+// todavia no entiendo muy bien la diferencia entre pilot light y warm standby (y multisite)
+
 /*
 Estudiar: 
 
-tema de logins y federations. 
-Repaso a redshift. X
-Repado a los backups esos de S3 de volumenes on premise. 
-Hojitas de cosas colganderas. 
-Repasar ciclos de S3 (cuando tiempo debe estar en cada uno). X
-PirvateLink no se mucho
-Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
-SSE S3 existe? Sí existe. Revisar formas de encrptiado SEE-C, SSE-S3...y demas
-Puertos y protocolos. Se me han olvidado
+X tema de logins y federations. 
+X Repaso a redshift.
+  Repado a los backups esos de S3 de volumenes on premise. 
+X Repasar ciclos de S3 (cuando tiempo debe estar en cada uno).
+  PirvateLink no se mucho
+  Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
+  SSE S3 existe? Sí existe. Revisar formas de encrptiado SEE-C, SSE-S3...y demas
+  Puertos y protocolos. Se me han olvidado!!!!!!!!!!!!!!!!!!!!!!
+
+
 */
