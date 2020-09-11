@@ -533,10 +533,10 @@ En que Load Balancer viene activado Cross-Zone Load Balancer por defecto?
 ALB. En CLB y NLB hay que activarlo.
 
 Que es Active-Active failover en Route 53?
-Siempre se incluyen todos los servicios para que se usen, tanto los primeras como los secundarios
+Siempre se incluyen todos los servicios para que se usen, tanto los primeras como los secundarios. Si uno falla, simplemente se "elimina" de la lista de servicio disponibles y se deja de mandar peticiones.
 
 Que es Active-Pasive failover en Route 53?
-Se empiezan a redirigir a los servicios secundarios unicamente cuando el primera falla.
+Se empiezan a redirigir a los servicios secundarios (que se encuentran en standby) unicamente cuando el primera falla.
 
 Para que sirve CreationPolicy en CloudFormation?
 Es un evento invocado cuando la creacion de un recurso esta listo. Para resolver problemas de asincronia
@@ -570,9 +570,6 @@ Te permite conectar tu nube AWS a tu on-premises usando sesiones privadas con IP
 
 Que permiso necesitamos para copiar objetos S3 de un bucket a otro de otra cuenta?
 Cross-account permissions para S3 en IAM.
-
-Cuanto tiempo almacena Kinesis un stream por defecto?
-24 horas
 
 Que nos permite AWS Beanstalk?
 Desplegar y gestionar aplicaciones de manera sencilla y rapida. Simplemente subes tu app y el se encarga de load balancing, provisioning y application health monitoring. Parecido a Heroku diria
@@ -623,7 +620,7 @@ Que es Redshift Spectrum?
 Nos permite hacer queries directamente sobre S3, pero a diferencia de Kinesis que es serverless, necesitamos una instancia/cluster
 
 Que servicio de Amazon nos permite Massively Parallel Query Execution para hacer analiticas?
-Redshift
+Redshift. Con esta y otras características nos ofrece una rendimiento de hasta 10x para tareas de analítica respecto a otras soluciones.
 
 Cual es el servicio principal de AWS que se nos viene a la mente cuando hablamos de "real time" big data?
 AWS Kinesis
@@ -1119,6 +1116,18 @@ Let Route 53 route traffic to specific instances based on the location of the IN
 
 Qué servicio se salta la restricción de permanecer en S3 antes de mover los datos Glacier Deep Archive?
 DataSync! Es el servicio especial para mover grandes cantidades de archivos (tanto on-premises como inter-region), por lo que tiene logica que pueda.
+
+Un Elastic IP se libera al parar una instancia?
+No
+
+Se pierden los datos de una instancia EC2 cuando la paramos?
+Sí
+
+Se nos cobra cuando una Spot Instance esta stopping? Y una On-Demand?
+La Spot NO se sobra, pero la On-Demand SÍ!
+
+AWS EMR? Qué es?
+Amazon EMR es la plataforma para big data para procesamiento y análisis de grandes volúmenes de datos
 `
 
 // ECS vs Fargate
@@ -1127,13 +1136,16 @@ DataSync! Es el servicio especial para mover grandes cantidades de archivos (tan
 // clasic load balancer + unique ip + servir mediante SSL. -> Cloudfront + SNI? Sí
 // HIPAA no recuerdo
 // todavia no entiendo muy bien la diferencia entre pilot light y warm standby (y multisite)
+// Un elastic Ip se libera al parar la maquina EC2?
+// 3x05 ni idea de cual es????
+// bulk retrieval vs expedited retrieval???
 
 /*
 Estudiar: 
 
 X tema de logins y federations. 
 X Repaso a redshift.
-  Repado a los backups esos de S3 de volumenes on premise. 
+X Repado a los backups esos de S3 de volumenes on premise. 
 X Repasar ciclos de S3 (cuando tiempo debe estar en cada uno).
   PirvateLink no se mucho
   Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
