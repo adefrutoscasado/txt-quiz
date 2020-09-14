@@ -878,7 +878,7 @@ Qué significa el parámetro --include-global-service-events en CloudTrail?
 Sirve para trackear todos los eventos realizados y llamadas API desde CLI y AWS Console.
 
 Qué es Enhanced Monitoring?
-Un tipo de monitoreo disponible en RDS que nos brinda una mayor precisión debido a que reside en una capa más fisica de la máquina. Nos ofrece más información de como se gestionan los thread en la CPU
+Un tipo de monitoreo disponible en RDS que nos brinda una mayor precisión debido a que reside en una capa más fisica de la máquina. Nos ofrece más información de como se gestionan los thread en la CPU (RDS child processes and OS Processes)
 
 Qué significa POSIX-compliant?
 Being POSIX-compliant for an OS means that it supports those standards (e.g., APIs), and thus can either natively run UNIX programs, or at least porting an application from UNIX to the target OS is easy/easier than if it did not support POSIX
@@ -1105,6 +1105,9 @@ Its designed to optimize costs by automatically moving data to the most cost-eff
 Qué podemos utilizar para mejorar la latencia de una app que sirve en una IP publica estatica?
 AWS Global Accelerator. Cloud front no puede servir IP publica estatica!!
 
+Qué diferencia hay entre AWS Global Accelerator y AWS Transfer Acelerator?
+AWS Global Accelerator mejora la latencia de una app que sirve en una IP publica estatica (cosa que cloudfront no puede). AWS Transfer Accelerator mejora la velocidad solo en S3.
+
 Cómo podemos reducir el tiempo de retrieve de DynamoDB from milliseconds to microseconds?
 Usando DAX. ElasticCache no reduce tanto. (1x52)
 
@@ -1128,6 +1131,15 @@ La Spot NO se sobra, pero la On-Demand SÍ!
 
 AWS EMR? Qué es?
 Amazon EMR es la plataforma para big data para procesamiento y análisis de grandes volúmenes de datos
+
+AWS Step Functions VS SWF, diferencias?
+Step Functions ofrece una interfaz mas visual e intuitiva (recomendable para apps nuevas). SWF se recomiendan cuando existen "extenal deciders". Ademas, en Step Functions usamos JSON de manera declarativa y en SWF picamos el codigo directamente.
+
+Para qué sirve Lamda@Edge?
+Para realizar procesamiento de computo cerca del usuario usando los edge locations.
+
+Bulk retrieval vs Expedited retrieval?
+Bulk permite recuperar archivos de manera lenta (5-12 horas), de tal forma que no tiene apenas coste (para Glacier). Expedited lo contrario, permite recuperarlo rapido (1-5 minutos) con un coste mayor (para urgencias).
 `
 
 // ECS vs Fargate
@@ -1136,9 +1148,7 @@ Amazon EMR es la plataforma para big data para procesamiento y análisis de gran
 // clasic load balancer + unique ip + servir mediante SSL. -> Cloudfront + SNI? Sí
 // HIPAA no recuerdo
 // todavia no entiendo muy bien la diferencia entre pilot light y warm standby (y multisite)
-// Un elastic Ip se libera al parar la maquina EC2?
-// 3x05 ni idea de cual es????
-// bulk retrieval vs expedited retrieval???
+
 
 /*
 Estudiar: 
@@ -1147,10 +1157,7 @@ X tema de logins y federations.
 X Repaso a redshift.
 X Repado a los backups esos de S3 de volumenes on premise. 
 X Repasar ciclos de S3 (cuando tiempo debe estar en cada uno).
-  PirvateLink no se mucho
+  PrivateLink no se mucho
   Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
-  SSE S3 existe? Sí existe. Revisar formas de encrptiado SEE-C, SSE-S3...y demas
   Puertos y protocolos. Se me han olvidado!!!!!!!!!!!!!!!!!!!!!!
-
-
 */
