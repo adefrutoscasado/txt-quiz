@@ -815,7 +815,7 @@ IPsec qué es?
 (Internet Protocol security) Hace referencia a la conexión encriptada que utiliza Site-to-Site VPN.
 
 Qué es Amazon Connect?
-El servicio que vende y utiliza amazon para dar soporte y servicio de contacto para clientes.
+El servicio que vende y utiliza amazon para dar soporte y servicio de contacto para clientes. (Truco para distinguirlo: No contiene AWS)
 
 Cómo movemos un EBS de un AZ a otro?
 Creamos un snapshot y creamos un nuevo volumen en la nueva AZ usando el snapshot.
