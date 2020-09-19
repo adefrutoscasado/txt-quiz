@@ -641,7 +641,7 @@ Podemos eliminar datos en Kinesis?
 No, los datos son inmutables
 
 Podemos cambiar el numero de Shards y escalarlo?
-Sí (se llama reshard/merge)
+Sí (se llama reshard). "MergeShare" para disminuir numero. "UpdateShardCount" para aumentarlo.
 
 Como se determina a qué shard se envía un dato en Kinesis?
 Mediante su clave de mensaje (message key), una cabecera que contiene el id hasheado. Si todos apuntan al mismo se producirá hot partition.
@@ -854,7 +854,7 @@ En qué momento nos puede ayudar MultiAZ además de con la caída de una zona?
 Mientras se producen OS patches, system upgrades o db instance scaling.
 
 Como podemos usar HTTPS en un RDS de AWS si se nos requiere (2 opciones!)?
-Opción 1: Descargar el Root CA Certificate de Amazon y permitir solo el puerto 443 en el SG. Opcion 2: Si usamos IAM en el RDS automaticamente la comunicación se hará mediante el uso de un SSL.
+Opción 1: Descargar el Root CA Certificate de Amazon y permitir solo el puerto 443 en el SG. Opcion 2: Si usamos IAM en el RDS automaticamente la comunicación se hará mediante el uso de un SSL. Opcion 3: Usar "rds.force_ssl" a true y resetear.
 
 Qué requisito tiene el poder usar cross-region replication en S3?
 Versionado. Piensa como si fueran el replicado async que hace RDS, necesitamos orden para poder replicar!
@@ -1075,6 +1075,9 @@ DynamoDb on-demand backup nos permite crear backups. Para programarlos necesitar
 Podemos usar las instancia multi-AZ de Aurora como read replicas?
 Sí, para Aurora sí! Super guais los de amazon
 
+Podemos usar las read replicas de Aurora para aumentar Availability?
+Sí, para Aurora sí! Super guais los de amazon
+
 Qué dos acciones se pagan en KMS?
 API requests por uso de claves y almacenar customer keys.
 
@@ -1140,12 +1143,16 @@ Para realizar procesamiento de computo cerca del usuario usando los edge locatio
 
 Bulk retrieval vs Expedited retrieval?
 Bulk permite recuperar archivos de manera lenta (5-12 horas), de tal forma que no tiene apenas coste (para Glacier). Expedited lo contrario, permite recuperarlo rapido (1-5 minutos) con un coste mayor (para urgencias).
+
+Puede apuntar NLB a contenedores Fargate?
+Si
 `
 
 // ECS vs Fargate
 // Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
 
 // clasic load balancer + unique ip + servir mediante SSL. -> Cloudfront + SNI? Sí
+
 // HIPAA no recuerdo
 // todavia no entiendo muy bien la diferencia entre pilot light y warm standby (y multisite)
 
