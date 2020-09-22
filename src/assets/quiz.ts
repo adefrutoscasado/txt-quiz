@@ -1146,6 +1146,9 @@ Bulk permite recuperar archivos de manera lenta (5-12 horas), de tal forma que n
 
 Puede apuntar NLB a contenedores Fargate?
 Si
+
+Que es AWS Neptune?
+Amazon Neptune is a purpose-built, high-performance graph database engine optimized for storing billions of relationships and querying the graph with milliseconds latency.
 `
 
 // ECS vs Fargate
@@ -1154,8 +1157,9 @@ Si
 // clasic load balancer + unique ip + servir mediante SSL. -> Cloudfront + SNI? Sí
 
 // HIPAA no recuerdo
-// todavia no entiendo muy bien la diferencia entre pilot light y warm standby (y multisite)
 
+// Si en aurora las multi AZ se utilizan como read replicas, que diferencia hay? Stephan 1x17
+// Golden AMI que era???
 
 /*
 Estudiar: 
