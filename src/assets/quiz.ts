@@ -1,3 +1,5 @@
+import { servicesVersion } from "typescript"
+
 export default `
 
 En que parte de AWS podemos encontrar los identity providers
@@ -1161,6 +1163,11 @@ Amazon Neptune is a purpose-built, high-performance graph database engine optimi
 // Si en aurora las multi AZ se utilizan como read replicas, que diferencia hay? Stephan 1x17
 // Golden AMI que era???
 
+// Protocolos:
+// TODOS TCP menos Ping (ICMP) y Remote Desktop (TCP+UDP)
+
+// Puertos:
+
 /*
 Estudiar: 
 
@@ -1171,4 +1178,51 @@ X Repasar ciclos de S3 (cuando tiempo debe estar en cada uno).
   PrivateLink no se mucho
   Simple scaling vs tarjet scaling. Basadas en un unico valor pero no entiendo bien la diferencia
   Puertos y protocolos. Se me han olvidado!!!!!!!!!!!!!!!!!!!!!!
+*/
+
+
+
+/*
+- Protocolos:
+  TODOS TCP menos Ping (ICMP) y Remote Desktop (TCP+UDP)
+
+- Puertos:
+  FTP: 21
+  SSH: 22
+  SFTP: 22 (same as SSH)
+  HTTP: 80
+  HTTPS: 443
+  Remote desktop: 3389
+
+  // Menos importantes
+  PostgreSQL: 5432
+  MySQL: 3306
+  Oracle RDS: 1521
+  MSSQL Server: 1433
+  MariaDB: 3306 (same as MySQL)
+  Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)
+
+*/
+
+/*
+Other services
+
+CodeCommit: service where you can store your code. Similar service is GitHub
+CodeBuild: build and testing service in your CICD pipelines
+CodeDeploy: deploy the packaged code onto EC2 and AWS Lambda
+CodePipeline: orchestrate the actions of your CICD pipelines (build stages, manual approvals, many deploys, etc)
+CloudFormation: Infrastructure as Code for AWS. Declarative way to manage, create and update resources.
+ECS (Elastic Container Service): Docker container management system on AWS. Helps with creating micro-services.
+ECR (Elastic Container Registry): Docker images repository on AWS. Docker Images can be pushed and pulled from there
+Step Functions: Orchestrate / Coordinate Lambda functions and ECS containers into a workflow
+SWF (Simple Workflow Service): Old way of orchestrating a big workflow.
+EMR (Elastic Map Reduce): Big Data / Hadoop / Spark clusters on AWS, deployed on EC2 for you
+Glue: ETL (Extract Transform Load) service on AWS
+OpsWorks: managed Chef & Puppet on AWS
+ElasticTranscoder: managed media (video, music) converter service into various optimized formats
+Organizations: hierarchy and centralized management of multiple AWS accounts
+Workspaces: Virtual Desktop on Demand in the Cloud. Replaces traditional on-premise VDI infrastructure
+AppSync: GraphQL as a service on AWS
+SSO (Single Sign On): One login managed by AWS to log in to various business SAML 2.0-compatible applications (office 365 etc)
+
 */
