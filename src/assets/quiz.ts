@@ -93,11 +93,11 @@ En un load balancer que hacemos si alguna maquina EC2 nos reporta fallos en los 
 Dejamos de mandar peticiones. No la terminamos ni la reiniciamos.
 
 Que load balancer soporta enrutamiento por path?
-Application Load balancer. Puede ser en funcion de hostname, path y query string.
+Application Load balancer. Puede ser en funcion de hostname, path y query string. Es el unico!
 
 
 Como podemos dirigir las peticiones a las maquinas en funcion del path de la ruta?
-Usando ALB (Puede ser en funcion de hostname, path y query string). Route 53 NO
+Usando ALB (Puede ser en funcion de hostname, path y query string). Es el unico!. Route 53 NO
 
 Qué load balancer tiene una IP estatica por AZ?
 Network load balancer
@@ -1151,6 +1151,9 @@ Si
 
 Que es AWS Neptune?
 Amazon Neptune is a purpose-built, high-performance graph database engine optimized for storing billions of relationships and querying the graph with milliseconds latency.
+
+Que volumen/es EBS se puede usar como boot bolume?
+Los SSD.
 `
 
 // ECS vs Fargate
@@ -1163,10 +1166,7 @@ Amazon Neptune is a purpose-built, high-performance graph database engine optimi
 // Si en aurora las multi AZ se utilizan como read replicas, que diferencia hay? Stephan 1x17
 // Golden AMI que era???
 
-// Protocolos:
-// TODOS TCP menos Ping (ICMP) y Remote Desktop (TCP+UDP)
-
-// Puertos:
+// Secrets manager vs MKS. Guardar contraseña con rotacion cual? 2x18 de stephane
 
 /*
 Estudiar: 
